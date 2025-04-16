@@ -1,4 +1,3 @@
-import FeaturedPost from "@/components/post/featured-post";
 import { type SharedData } from "@/types";
 import { Head, Link, usePage } from "@inertiajs/react";
 
