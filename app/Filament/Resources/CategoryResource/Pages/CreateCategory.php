@@ -15,4 +15,9 @@ class CreateCategory extends CreateRecord
         $data['user_id'] = auth()->user()->id;
         return $data;
     }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }

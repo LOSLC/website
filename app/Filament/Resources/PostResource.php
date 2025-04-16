@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\PostResource\Pages;
 use App\Filament\Resources\PostResource\RelationManagers;
 use App\Models\Post;
+use App\Models\Tag;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -27,6 +28,8 @@ class PostResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('title')
                     ->required()
+                    ->unique()
+                    ->columnSpanFull()
                     ->maxLength(255),
                 Forms\Components\Select::make('category_id')
                     ->relationship(name: 'category', titleAttribute: 'name')
@@ -34,6 +37,12 @@ class PostResource extends Resource
                     ->native(false)
                     ->searchable()
                     ->preload(),
+                Forms\Components\Select::make('tags')
+                    ->options(Tag::pluck('name', 'id'))
+                    ->required()
+                    ->native(false)
+                    ->searchable()
+                    ->multiple(),
                 Forms\Components\FileUpload::make('image')
                     ->image()
                     ->imageEditor()
