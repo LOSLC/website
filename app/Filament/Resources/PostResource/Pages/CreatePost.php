@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\PostResource\Pages;
 
 use App\Filament\Resources\PostResource;
-use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreatePost extends CreateRecord
@@ -15,5 +14,15 @@ class CreatePost extends CreateRecord
         $data['slug'] = \Str::slug($data['title']);
         $data['user_id'] = \Auth::id();
         return $data;
+    }
+
+    protected function afterCreate(): void
+    {
+        $this->record->tags()->sync(request()->input('tags', []));
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->previousUrl ?? $this->getResource()::getUrl('index');
     }
 }
