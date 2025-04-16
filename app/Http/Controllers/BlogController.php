@@ -12,7 +12,7 @@ class BlogController extends Controller
     //  Fonction pour la route "/"
     public function index()
     {
-        return Inertia::render();
+        return Inertia::render('blog/main');
     }
 
     // Fonction pour la route "/post/{slug}-{post}"
