@@ -38,10 +38,11 @@ class PostResource extends Resource
                     ->searchable()
                     ->preload(),
                 Forms\Components\Select::make('tags')
+                    ->relationship(name: 'tags', titleAttribute: 'name')
+                    ->multiple()
                     ->options(Tag::pluck('name', 'id'))
                     ->native(false)
-                    ->searchable()
-                    ->multiple(),
+                    ->searchable(),
                 Forms\Components\FileUpload::make('image')
                     ->image()
                     ->imageEditor()
