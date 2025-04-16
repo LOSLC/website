@@ -28,7 +28,7 @@ class PostResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('title')
                     ->required()
-                    ->unique()
+                    ->unique(ignorable: fn($record) => $record)
                     ->columnSpanFull()
                     ->maxLength(255),
                 Forms\Components\Select::make('category_id')
@@ -39,7 +39,6 @@ class PostResource extends Resource
                     ->preload(),
                 Forms\Components\Select::make('tags')
                     ->options(Tag::pluck('name', 'id'))
-                    ->required()
                     ->native(false)
                     ->searchable()
                     ->multiple(),
