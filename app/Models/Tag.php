@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Tag extends Model
 {
-    protected $fillable = ["name", "user_id"];
+    protected $fillable = ["name", "author_id"];
 
     public function posts(): BelongsToMany
     {
         return $this->belongsToMany(Post::class);
     }
 
-    public function user(): BelongsTo
+    public function author(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

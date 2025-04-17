@@ -10,7 +10,7 @@ class Comment extends Model
 {
     protected $fillable = [
         "content",
-        "user_id",
+        "author_id",
         "post_id",
         "parent_id",
     ];
@@ -20,7 +20,7 @@ class Comment extends Model
         return $this->belongsTo(Post::class);
     }
 
-    public function user(): BelongsTo
+    public function author(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

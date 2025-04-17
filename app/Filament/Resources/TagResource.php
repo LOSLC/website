@@ -39,8 +39,7 @@ class TagResource extends Resource
                 TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('user.name')
-                    ->label('Author')
+                TextColumn::make('author.name')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
