@@ -16,11 +16,6 @@ class CreatePost extends CreateRecord
         return $data;
     }
 
-    protected function afterCreate(): void
-    {
-        $this->record->tags()->sync(request()->input('tags', []));
-    }
-
     protected function getRedirectUrl(): string
     {
         return $this->previousUrl ?? $this->getResource()::getUrl('index');

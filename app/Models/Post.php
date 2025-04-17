@@ -18,6 +18,7 @@ class Post extends Model
         "image",
         "status",
         "views",
+        "description",
     ];
 
     public function user(): BelongsTo

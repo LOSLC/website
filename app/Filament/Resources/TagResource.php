@@ -3,21 +3,17 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TagResource\Pages;
-use App\Filament\Resources\TagResource\RelationManagers;
-use App\Models\Tag;
-use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
-use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Resources\Resource;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Form;
+use Filament\Tables;
+use Filament\Forms;
+use App\Models\Tag;
 
 class TagResource extends Resource
 {
     protected static ?string $model = Tag::class;
-
 
     protected static ?string $navigationGroup = 'Blog';
 

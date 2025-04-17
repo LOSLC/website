@@ -2,17 +2,16 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\PostRessource\RelationManagers\TagsRelationManager;
 use App\Filament\Resources\PostResource\Pages;
-use App\Filament\Resources\PostResource\RelationManagers;
+use Filament\Forms\Components\Section;
+use Filament\Resources\Resource;
+use Filament\Tables\Table;
+use Filament\Forms\Form;
+use Filament\Tables;
 use App\Models\Post;
 use App\Models\Tag;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PostResource extends Resource
 {
@@ -38,20 +37,36 @@ class PostResource extends Resource
                     ->searchable()
                     ->preload(),
                 Forms\Components\Select::make('tags')
-                    ->options(Tag::pluck('name', 'id'))
+                    ->relationship(name: 'tags', titleAttribute: 'name')
+                    ->multiple()
+                    ->preload()
+                    ->suffixIcon('heroicon-m-tag')
                     ->native(false)
                     ->searchable()
-                    ->multiple(),
-                Forms\Components\FileUpload::make('image')
-                    ->image()
-                    ->imageEditor()
-                    ->columnSpanFull(),
+                    ->createOptionUsing(function (string $name) {
+                        return Tag::create([
+                            'name' => $name,
+                            'user_id' => auth()->id()
+                        ])->id;
+                    }),
                 Forms\Components\RichEditor::make('content')
                     ->required()
                     ->fileAttachmentsDisk('public')
                     ->fileAttachmentsDirectory('posts')
                     ->fileAttachmentsVisibility('public')
                     ->columnSpanFull(),
+                Section::make('Other options')
+                    ->schema([
+                        Forms\Components\FileUpload::make('image')
+                            ->image()
+                            ->imageEditor()
+                            ->columnSpanFull(),
+                        Forms\Components\Textarea::make('description')
+                            ->required()
+                            ->columnSpanFull()
+                            ->minLength(32)
+                            ->maxLength(255),
+                    ]),
             ]);
     }
 
@@ -101,7 +116,7 @@ class PostResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            TagsRelationManager::class,
         ];
     }
 
