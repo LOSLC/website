@@ -2,13 +2,11 @@
 
 namespace App\Filament\Resources\PostRessource\RelationManagers;
 
-use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Form;
+use Filament\Tables;
+use Filament\Forms;
 
 class TagsRelationManager extends RelationManager
 {
@@ -35,7 +33,11 @@ class TagsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()
+                    ->mutateFormDataUsing(function (array $data): array {
+                        $data['user_id'] = auth()->id();
+                        return $data;
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -47,4 +49,5 @@ class TagsRelationManager extends RelationManager
                 ]),
             ]);
     }
+
 }

@@ -2,17 +2,16 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\PostResource\Pages;
 use App\Filament\Resources\PostRessource\RelationManagers\TagsRelationManager;
+use App\Filament\Resources\PostResource\Pages;
+use Filament\Forms\Components\Section;
+use Filament\Resources\Resource;
+use Filament\Tables\Table;
+use Filament\Forms\Form;
+use Filament\Tables;
 use App\Models\Post;
 use App\Models\Tag;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PostResource extends Resource
 {
@@ -40,19 +39,34 @@ class PostResource extends Resource
                 Forms\Components\Select::make('tags')
                     ->relationship(name: 'tags', titleAttribute: 'name')
                     ->multiple()
-                    ->options(Tag::pluck('name', 'id'))
+                    ->preload()
+                    ->suffixIcon('heroicon-m-tag')
                     ->native(false)
-                    ->searchable(),
-                Forms\Components\FileUpload::make('image')
-                    ->image()
-                    ->imageEditor()
-                    ->columnSpanFull(),
+                    ->searchable()
+                    ->createOptionUsing(function (string $name) {
+                        return Tag::create([
+                            'name' => $name,
+                            'user_id' => auth()->id()
+                        ])->id;
+                    }),
                 Forms\Components\RichEditor::make('content')
                     ->required()
                     ->fileAttachmentsDisk('public')
                     ->fileAttachmentsDirectory('posts')
                     ->fileAttachmentsVisibility('public')
                     ->columnSpanFull(),
+                Section::make('Other options')
+                    ->schema([
+                        Forms\Components\FileUpload::make('image')
+                            ->image()
+                            ->imageEditor()
+                            ->columnSpanFull(),
+                        Forms\Components\Textarea::make('description')
+                            ->required()
+                            ->columnSpanFull()
+                            ->minLength(32)
+                            ->maxLength(255),
+                    ]),
             ]);
     }
 
