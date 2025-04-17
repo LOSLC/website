@@ -35,7 +35,7 @@ class TagsRelationManager extends RelationManager
             ->headerActions([
                 Tables\Actions\CreateAction::make()
                     ->mutateFormDataUsing(function (array $data): array {
-                        $data['user_id'] = auth()->id();
+                        $data['author_id'] = auth()->id();
                         return $data;
                     }),
             ])

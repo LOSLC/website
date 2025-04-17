@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Storage;
 
 class Post extends Model
 {
@@ -13,7 +14,7 @@ class Post extends Model
         "title",
         "content",
         "slug",
-        "user_id",
+        "author_id",
         "category_id",
         "image",
         "status",
@@ -21,7 +22,7 @@ class Post extends Model
         "description",
     ];
 
-    public function user(): BelongsTo
+    public function author(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
@@ -48,12 +49,22 @@ class Post extends Model
 
     public function likes(): int
     {
-        return PostLike::where('post_id', $this->id)->where('is_like', true)->count();
+        return $this->likedBy()->count();
     }
 
     public function dislikes(): int
     {
         return PostLike::where('post_id', $this->id)->where('is_like', false)->count();
+    }
+
+    public function likedBy(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, "post_likes");
+    }
+
+    public function getIsLikedAttribute(): bool
+    {
+        return auth()->check() && $this->likedBy->contains(auth()->user());
     }
 
 }

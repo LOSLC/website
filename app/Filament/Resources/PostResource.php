@@ -76,10 +76,8 @@ class PostResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('title')
                     ->searchable()
-                    ->label('Titre')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('user.name')
-                    ->label('Author')
+                Tables\Columns\TextColumn::make('author.name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('category.name')
                     ->sortable()
