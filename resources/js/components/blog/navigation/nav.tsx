@@ -1,5 +1,6 @@
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Link } from "./link";
+import ThemeSwitch from "@/components/ui/theming/theme-switch";
 
 export default function Navbar({ links }: { links?: Link[] }) {
   return (
@@ -23,7 +24,8 @@ export default function Navbar({ links }: { links?: Link[] }) {
             );
           })}
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center gap-2">
+          <ThemeSwitch />
           <a
             href="/login"
             className={`rounded-none uppercase ${buttonVariants({ variant: "default" })}`}

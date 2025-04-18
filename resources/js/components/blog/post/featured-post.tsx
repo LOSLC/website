@@ -3,12 +3,12 @@ import { Post } from "./post";
 
 export default function FeaturedPost({ post }: { post: Post }) {
   return (
-    <div className="flex flex-col w-full md:w-10/12 lg:w-3/5 justify-between gap-4">
+    <div className="flex flex-col w-full md:w-10/12 lg:w-10/12 justify-between gap-4 motion-preset-bounce cursor-default">
       <div className="w-full">
         <img className="w-full" src={post.image} alt="Post Cover" />
       </div>
       <div className="flex flex-col">
-        <span className="text-2xl md:text-4xl">{}</span>
+        <span className="text-2xl md:text-2xl font-bold">{post.title}</span>
         <div className="flex gap-3">
           <div className="flex gap-2">
             <Heart />
