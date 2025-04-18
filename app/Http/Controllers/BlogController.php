@@ -10,14 +10,32 @@ use Inertia\Response;
 class BlogController extends Controller
 {
 
-    //  Fonction pour la route "/"
     public function index(): Response
     {
-        $posts = Post::all()->where('status', 'published');
-        return Inertia::render('blog/main', ['posts' => $posts]);
+        $posts = Post::latest()->select(['id', 'title', 'slug', 'description', 'image', 'views'])->where('status', 'published')->paginate(10);
+
+        return Inertia::render('blog/main', [
+            'posts' => $posts->items(),
+            'pagination' => [
+                'current_page' => $posts->currentPage(),
+                'last_page' => $posts->lastPage(),
+                'per_page' => $posts->perPage(),
+                'total' => $posts->total(),
+                'links' => $posts->linkCollection(),
+            ],
+        ]);
     }
     public function show(string $slug, Post $post)
     {
-        // return Inertia::render();
+        $post->status != 'published' && abort(404);
+        $post->update(['views' => $post->views + 1]);
+        $post->likeCount = $post->likes();
+        return Inertia::render('blog/post/main', [
+            'post' => $post,
+            'category' => $post->category(),
+            'tags' => $post->tags(),
+            'comments' => $post->comments()->with('user')->latest()->get(),
+            'isLiked' => $post->getIsLikedAttribute()
+        ]);
     }
 }
