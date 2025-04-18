@@ -12,7 +12,7 @@ export interface Post {
     slug: string;
     image: string | null;
     isLiked: boolean | null;
-    likeCount: number;
+    likesCount: number;
     views: number;
     created_at: string;
     updated_at: string;
