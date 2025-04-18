@@ -1,31 +1,22 @@
 import { Heart, MessageSquare } from "lucide-react";
+import { Post } from "./post";
 
-export default function FeaturedPost({
-  title,
-  likesCount,
-  commentsCount,
-  coverURL,
-}: {
-  title: string;
-  likesCount: number;
-  commentsCount: number;
-  coverURL: string;
-}) {
+export default function FeaturedPost({ post }: { post: Post }) {
   return (
-    <div className="flex flex-col w-full md:w-10/12 lg:w-3/5 justify-between gap-4">
-      <div className="w-full h-12 bg-black">
-        <img className="w-full" src={coverURL} alt="Post Cover" />
+    <div className="flex flex-col w-full md:w-10/12 lg:w-10/12 justify-between gap-4 motion-preset-bounce cursor-default">
+      <div className="w-full">
+        <img className="w-full" src={post.image} alt="Post Cover" />
       </div>
       <div className="flex flex-col">
-        <span className="text-2xl md:text-4xl">{title}</span>
+        <span className="text-2xl md:text-2xl font-bold">{post.title}</span>
         <div className="flex gap-3">
           <div className="flex gap-2">
             <Heart />
-            <span>{likesCount}</span>
+            <span>{post.likes}</span>
           </div>
           <div className="flex gap-2">
             <MessageSquare />
-            <span>{commentsCount}</span>
+            <span>{post.comments}</span>
           </div>
         </div>
       </div>

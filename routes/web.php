@@ -6,7 +6,8 @@ use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
 
-Route::get('/', [PublicController::class, 'home'])->name('home');
+/*Route::get('/', [PublicController::class, 'home'])->name('home');*/
+Route::get('/', [BlogController::class, 'index'])->name('index');
 Route::name('blog.')->prefix('blog')->group(function () {
     Route::get('/', [BlogController::class, 'index'])->name('index');
     Route::get('/posts/{slug}-{post}', [BlogController::class, 'show'])
