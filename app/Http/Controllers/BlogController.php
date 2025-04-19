@@ -42,7 +42,7 @@ class BlogController extends Controller
     {
         $post->status != 'published' && abort(404);
         $post->update(['views' => $post->views + 1]);
-        $post->likesCount = $post->likes() ?? 0;
+        $post->likesCount = $post->getLikesCountAttribute() ?? 0;
         return Inertia::render('blog/post/main', [
             'post' => $post,
             'tags' => $post->tags(),

@@ -22,8 +22,6 @@ export default function postPage(props: Props) {
             <div className="flex items-center justify-center">
                 <div className="max-w-4xl">
                     <div>
-                        {' '}
-                        {/* Shwo post content */}
                         <h1 className="mb-2 mb-4 text-center text-2xl font-bold"> {props.post.title} </h1>
                         {props.post.image && <img src={`/storage/${props.post.image}`} alt={props.post.title} className="mb-4 w-full" />}
                         <PostContent content={props.post.content} />

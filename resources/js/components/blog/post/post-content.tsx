@@ -1,5 +1,7 @@
+import hljs from 'highlight.js';
+import 'highlight.js/styles/tokyo-night-dark.min.css'; // ou un autre thème highlight.js
 import parse, { DOMNode, domToReact, HTMLReactParserOptions } from 'html-react-parser';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 interface PostContentProps {
     content: string;
@@ -15,20 +17,28 @@ const classMap: Record<string, string> = {
     ol: 'list-decimal list-inside mb-4 pl-4',
     a: 'text-primary hover:underline',
     blockquote: 'border-l-4 border-accent pl-4 italic my-4 text-muted-foreground bg-accent/30 p-2',
-    pre: 'bg-muted p-4 mb-4 overflow-auto',
+    pre: 'bg-muted p-4 mb-4 overflow-auto text-sm',
     code: 'bg-muted px-1 font-mono text-sm',
 };
 
 const PostContent: React.FC<PostContentProps> = ({ content }) => {
+    const contentRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (contentRef.current) {
+            contentRef.current.querySelectorAll('pre').forEach((block) => {
+                hljs.highlightElement(block as HTMLElement);
+            });
+        }
+    }, [content]);
+
     const options: HTMLReactParserOptions = {
         replace: (domNode) => {
-            // Vérifie qu'il s'agit d'un élément HTML avec nom de balise
             if (domNode.type === 'tag' && domNode.attribs) {
                 const tagName = domNode.name.toLowerCase();
                 const tailwindClass = classMap[tagName];
 
                 if (tailwindClass) {
-                    // Extrait et supprime l'attribut 'class' original
                     const { class: existingClass, ...restAttribs } = domNode.attribs;
                     const className = [existingClass, tailwindClass].filter(Boolean).join(' ');
 
@@ -39,8 +49,7 @@ const PostContent: React.FC<PostContentProps> = ({ content }) => {
         },
     };
 
-    // Si vous ne voyez rien, vérifiez que 'content' contient bien du HTML valide
-    return <div>{parse(content, options)}</div>;
+    return <div ref={contentRef}>{parse(content, options)}</div>;
 };
 
 export default PostContent;

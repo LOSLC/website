@@ -57,7 +57,7 @@ class Post extends Model
 
     public function getIsLikedAttribute(): bool
     {
-        return auth()->check() && $this->likedBy->contains(auth()->user());
+        return auth()->check() && $this->likes->contains(auth()->user());
     }
 
     public function getCreatedAtAttribute(string $value): string
