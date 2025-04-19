@@ -13,7 +13,7 @@ export default function ThemeSwitch() {
           updateAppearance(appearance === "light" ? "dark" : "light");
         }}
       >
-        {appearance === "dark" ? <Sun className="motion-preset-wiggle" /> : <Moon className="motion-preset-wiggle"/>}
+        {appearance === "light" ? <Sun className="motion-preset-wiggle" /> : <Moon className="motion-preset-wiggle"/>}
       </Button>
     </>
   );
