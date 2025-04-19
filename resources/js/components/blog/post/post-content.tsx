@@ -2,9 +2,6 @@ import parse, { DOMNode, domToReact, HTMLReactParserOptions } from 'html-react-p
 import React from 'react';
 
 interface PostContentProps {
-    /**
-     * Contenu de l'article au format HTML brut
-     */
     content: string;
 }
 
@@ -18,8 +15,8 @@ const classMap: Record<string, string> = {
     ol: 'list-decimal list-inside mb-4 pl-4',
     a: 'text-primary hover:underline',
     blockquote: 'border-l-4 border-accent pl-4 italic my-4 text-muted-foreground bg-accent/30 p-2',
-    pre: 'bg-gray-100 p-4 mb-4 overflow-auto',
-    code: 'bg-gray-100 px-1 font-mono text-sm',
+    pre: 'bg-muted p-4 mb-4 overflow-auto',
+    code: 'bg-muted px-1 font-mono text-sm',
 };
 
 const PostContent: React.FC<PostContentProps> = ({ content }) => {

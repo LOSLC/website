@@ -10,7 +10,7 @@ Route::get('/', [BlogController::class, 'index'])->name('index');
 Route::name('blog.')->prefix('blog')->group(function () {
     Route::get('/', [BlogController::class, 'index'])->name('index');
     Route::get('/posts/{slug}-{post}', [BlogController::class, 'show'])
-        ->where('post', '[0-9]+')->where('slug', '[A-Za-z0-9\-]+')->name('show');
+        ->where(['slug' => '[A-Za-z0-9\-]+', 'post' => '[0-9]+'])->name('show');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
