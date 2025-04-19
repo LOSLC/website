@@ -12,8 +12,12 @@ class BlogController extends Controller
 
     public function index(): Response
     {
-        $posts = Post::latest()->select(['id', 'title', 'slug', 'description', 'image', 'views'])->where('status', 'published')->paginate(10);
-
+        $posts = Post::latest()->select(['id', 'title', 'slug', 'description', 'image', 'views'])
+            ->where('status', 'published')->paginate(10);
+        $posts->getCollection()->transform(function ($post) {
+            $post->likesCount = $post->likes() ?? 0;
+            return $post;
+        });
         return Inertia::render('blog/main', [
             'posts' => $posts->items(),
             'pagination' => [
@@ -29,7 +33,7 @@ class BlogController extends Controller
     {
         $post->status != 'published' && abort(404);
         $post->update(['views' => $post->views + 1]);
-        $post->likeCount = $post->likes();
+        $post->likesCount = $post->likes() ?? 0;
         return Inertia::render('blog/post/main', [
             'post' => $post,
             'category' => $post->category(),
