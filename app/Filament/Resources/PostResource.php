@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\PostRessource\RelationManagers\TagsRelationManager;
+use App\Filament\Resources\PostResource\RelationManagers\TagsRelationManager;
 use App\Filament\Resources\PostResource\Pages;
 use Filament\Forms\Components\Section;
 use Filament\Resources\Resource;
