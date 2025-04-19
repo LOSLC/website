@@ -8,7 +8,6 @@ export default function ThemeSwitch() {
     <>
       <Button
         variant={"ghost"}
-        className=""
         onClick={() => {
           appearance === "light"
             ? updateAppearance("dark")
