@@ -9,8 +9,8 @@ export default function Paginator({ pagination }: { pagination: Pagination }) {
                     key={index}
                     disabled={!link.url}
                     onClick={() => router.visit(link.url || '#')}
-                    className={`cursor-pointer px-4 py-2 ${
-                        link.active ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'
+                    className={`px-4 py-2 ${
+                        link.active ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground cursor-pointer'
                     } ${!link.url ? 'cursor-default opacity-50' : ''}`}
                 >
                     {link.label.replace('&laquo;', '«').replace('&raquo;', '»')}

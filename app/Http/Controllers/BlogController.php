@@ -12,7 +12,8 @@ class BlogController extends Controller
 
     public function index(): Response
     {
-        $posts = Post::latest()->select(['id', 'title', 'slug', 'description', 'image', 'views'])->where('status', 'published')->paginate(1);
+        $posts = Post::latest()->select(['id', 'title', 'slug', 'description', 'image', 'views'])
+            ->where('status', 'published')->paginate(10);
         $posts->getCollection()->transform(function ($post) {
             $post->likesCount = $post->likes() ?? 0;
             return $post;

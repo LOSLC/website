@@ -2,23 +2,23 @@ import { Post } from '@/types/post';
 import { Link } from '@inertiajs/react';
 import { Eye, Heart } from 'lucide-react';
 
-export default function FeaturedPost({ post }: { post: Post }) {
+export default function PostComponent({ post }: { post: Post }) {
     return (
-        <article className="motion-preset-bounce mb-4 flex w-full max-w-4xl items-center justify-center">
+        <article className="motion-preset-bounce mb-4 flex items-center justify-center border bg-white shadow">
             <Link
                 href={route('blog.show', { slug: post.slug, post: post.id })}
-                className="flex w-full cursor-default flex-col items-center justify-center gap-4"
+                className="bg-card flex w-full cursor-default flex-col items-center justify-center gap-4"
             >
                 <div className="w-full">
                     <img
-                        className="h-50 w-full cursor-pointer object-cover"
-                        src={post.image ? `/storage/${post.image}` : '/post-no-cover.png'}
+                        className="h-50 w-full cursor-pointer border-b-2 object-cover"
+                        src={post.image ? `/storage/${post.image}` : '/assets/img/cover.png'}
                         alt={post.title}
                     />
                 </div>
-                <div className="flex w-full flex-col">
-                    <h3 className="cursor-pointer text-2xl font-bold md:text-2xl">{post.title.substring(0, 30) + '...'}</h3>
-                    <p className="mb-2 text-sm text-gray-500">{post.description.substring(0, 150) + '...'}</p>
+                <div className="flex w-full flex-col p-2">
+                    <h3 className="cursor-pointer text-2xl font-semibold">{post.title}</h3>
+                    <p className="text-muted-foreground mb-2 text-sm">{post.description}</p>
                     <div className="flex justify-between">
                         <div className="flex gap-2">
                             <Heart />

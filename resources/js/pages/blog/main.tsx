@@ -1,36 +1,25 @@
-import { Link } from '@/components/blog/navigation/link';
-import Navbar from '@/components/blog/navigation/nav';
+import Layout from '@/components/blog/layout';
 import Paginator from '@/components/blog/navigation/pagination';
-import FeaturedPostCarousel from '@/components/blog/post/featured-post-carousel';
+import PostsContainer from '@/components/blog/post/post-container';
+import { BreadcrumbItem } from '@/types';
 import { Props } from '@/types/post';
+import { Head } from '@inertiajs/react';
 
 export default function BlogPage(props: Props) {
-    const navLinks: Link[] = [
+    const breadcrumbs: BreadcrumbItem[] = [
         {
-            name: 'Home',
-            href: '/',
-        },
-        {
-            name: 'Blog',
+            title: 'Blog',
             href: '/blog',
-        },
-        {
-            name: 'Store',
-            href: '/store',
-        },
-        {
-            name: 'About',
-            href: '/about',
         },
     ];
     return (
-        <div>
-            <Navbar links={navLinks} />
+        <Layout breadcrumbs={breadcrumbs}>
+            <Head title="Blog" />
             <div className="flex flex-col px-24 pt-4">
-                <span className="mb-6 text-xl sm:text-2xl md:text-3xl">Featured Posts</span>
-                <FeaturedPostCarousel posts={props.posts} />
+                <h1 className="mb-6 text-xl sm:text-2xl md:text-3xl">LOSLC Blog</h1>
+                <PostsContainer posts={props.posts} />
             </div>
             <Paginator pagination={props.pagination} />
-        </div>
+        </Layout>
     );
 }
