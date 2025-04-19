@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\PostRessource\RelationManagers;
+namespace App\Filament\Resources\PostResource\RelationManagers;
 
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables\Table;
@@ -33,11 +33,7 @@ class TagsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make()
-                    ->mutateFormDataUsing(function (array $data): array {
-                        $data['author_id'] = auth()->id();
-                        return $data;
-                    }),
+                Tables\Actions\CreateAction::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -49,5 +45,4 @@ class TagsRelationManager extends RelationManager
                 ]),
             ]);
     }
-
 }
