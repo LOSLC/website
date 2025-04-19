@@ -1,3 +1,4 @@
+import { truncateText } from "@/lib/utils";
 import { Post } from "@/types/post";
 import { Link } from "@inertiajs/react";
 import { ChevronRight } from "lucide-react";
@@ -29,7 +30,7 @@ export default function PostComponent({ post }: { post: Post }) {
                 {post.title}
               </h3>
               <p className="text-muted-foreground mb-2 text-sm">
-                {post.description}
+                {truncateText(post.description)}
               </p>
             </div>
           </div>
