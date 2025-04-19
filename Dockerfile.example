@@ -1,0 +1,80 @@
+FROM fedora:latest
+
+# Install required packages
+RUN dnf update -y && \
+    dnf install -y \
+    php \
+    php-cli \
+    php-fpm \
+    php-mysqlnd \
+    php-pdo \
+    php-mbstring \
+    php-xml \
+    php-gd \
+    php-curl \
+    php-zip \
+    php-intl \
+    php-json \
+    php-fileinfo \
+    php-tokenizer \
+    php-sodium \
+    mysql-server \
+    nodejs \
+    npm \
+    git \
+    unzip \
+    curl \
+    wget && \
+    dnf clean all
+
+# Install composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Install bun (alternative to npm as mentioned in README)
+RUN curl -fsSL https://bun.sh/install | bash && \
+    mv ~/.bun/bin/bun /usr/local/bin/
+
+# Set working directory
+WORKDIR /var/www/html
+
+# Copy project files
+COPY . .
+
+# Set proper permissions
+RUN chmod -R 775 storage bootstrap/cache
+RUN chmod +x artisan
+
+# Install PHP dependencies
+RUN composer install --optimize-autoloader --no-dev
+
+# Install Node.js dependencies and build assets
+RUN npm install && npm run build
+
+# Setup MySQL
+RUN mkdir -p /var/lib/mysql && \
+    chown -R mysql:mysql /var/lib/mysql && \
+    mysql_install_db --user=mysql --datadir=/var/lib/mysql
+
+# Copy .env.example to .env if .env doesn't exist
+RUN if [ ! -f .env ]; then cp .env.example .env; fi
+
+# Generate Laravel key
+RUN php artisan key:generate
+
+# Expose ports
+EXPOSE 8000 3306
+
+# Create startup script
+RUN echo '#!/bin/bash \n\
+systemctl start mysqld \n\
+mysql -u root -e "ALTER USER '"'"'root'"'"'@'"'"'localhost'"'"' IDENTIFIED BY '"'"'f86e90bb354137740c51ebee214d4314d6d91269'"'"';" \n\
+mysql -u root -p'"'"'root-password'"'"' -e "CREATE DATABASE IF NOT EXISTS loslc;" \n\
+mysql -u root -p'"'"'root-password'"'"' -e "FLUSH PRIVILEGES;" \n\
+php artisan migrate \n\
+php artisan storage:link \n\
+php artisan serve --host=0.0.0.0 --port=8000' > /usr/local/bin/start-services.sh
+
+RUN chmod +x /usr/local/bin/start-services.sh
+
+# Set the command to run when the container starts
+CMD ["/usr/local/bin/start-services.sh"]

@@ -24,3 +24,4 @@ yarn-error.log
 /.zed
 bun.*
 tailwind.config.js
+Dockerfile
