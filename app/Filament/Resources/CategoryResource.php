@@ -43,8 +43,7 @@ class CategoryResource extends Resource
                     ->sortable(),
                 TextColumn::make('description')
                     ->searchable(),
-                TextColumn::make('user.name')
-                    ->label('Author')
+                TextColumn::make('author.name')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()

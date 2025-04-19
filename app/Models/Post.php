@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Post extends Model
 {
@@ -13,7 +14,7 @@ class Post extends Model
         "title",
         "content",
         "slug",
-        "user_id",
+        "author_id",
         "category_id",
         "image",
         "status",
@@ -21,7 +22,8 @@ class Post extends Model
         "description",
     ];
 
-    public function user(): BelongsTo
+    // Relations
+    public function author(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
@@ -41,19 +43,31 @@ class Post extends Model
         return $this->belongsToMany(Tag::class);
     }
 
-    public function commentsCount(): int
+    public function likes(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, "post_likes");
+    }
+    // End of relations 
+
+    // Get attributes
+    public function getCommentsCountAttribute(): int
     {
         return $this->comments()->count();
     }
 
-    public function likes(): int
+    public function getIsLikedAttribute(): bool
     {
-        return PostLike::where('post_id', $this->id)->where('is_like', true)->count();
+        return auth()->check() && $this->likes->contains(auth()->user());
     }
 
-    public function dislikes(): int
+    public function getCreatedAtAttribute(string $value): string
     {
-        return PostLike::where('post_id', $this->id)->where('is_like', false)->count();
+        return Carbon::parse($value)->format('d M Y');
+    }
+
+    public function getLikesCountAttribute(): int
+    {
+        return $this->likes()->count();
     }
 
 }

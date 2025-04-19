@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Category extends Model
 {
-    protected $fillable = ["name", "description", "user_id"];
+    protected $fillable = ["name", "description", "author_id"];
 
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
     }
 
-    public function user(): BelongsTo
+    public function author(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

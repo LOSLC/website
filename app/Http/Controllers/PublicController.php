@@ -8,7 +8,7 @@ class PublicController extends Controller
 {
     public function home()
     {
-        return Inertia::render('welcome');
+        return Inertia::render('home');
     }
 
 }

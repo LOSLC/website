@@ -75,16 +75,20 @@ class PostResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')
+                    ->limit(35)
                     ->searchable()
-                    ->label('Titre')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('user.name')
-                    ->label('Author')
+                Tables\Columns\TextColumn::make('author.name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('category.name')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('image'),
+                Tables\Columns\SelectColumn::make('status')
+                    ->options([
+                        'draft' => 'Draft',
+                        'published' => 'Published',
+                    ]),
                 Tables\Columns\TextColumn::make('views')
                     ->numeric()
                     ->sortable(),
