@@ -1,10 +1,10 @@
 import { Post } from "@/types/post";
 import { Link } from "@inertiajs/react";
-import { ChevronRight, TableProperties } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 export default function PostComponent({ post }: { post: Post }) {
   return (
-    <article className="motion-preset-bounce bg-card mb-4 flex items-center justify-center border p-4 shadow rounded-xl">
+    <article className="motion-preset-blur-down bg-card mb-4 flex items-center justify-center border p-4 shadow rounded-xl w-full lg:w-7/12">
       <Link
         href={route("blog.show", { slug: post.slug, post: post.id })}
         className="flex w-full cursor-default flex-col items-start justify-between gap-4 md:flex-row"
