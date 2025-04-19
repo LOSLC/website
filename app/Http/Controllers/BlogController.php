@@ -2,33 +2,42 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
-use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Inertia\Response;
+use Inertia\Inertia;
+use App\Models\Post;
 
 class BlogController extends Controller
 {
-
     public function index(): Response
     {
-        $posts = Post::latest()->select(['id', 'title', 'slug', 'description', 'image', 'views'])
+        $posts = Post::latest()->with(['tags', 'category', 'author'])
+            ->select(['id', 'title', 'slug', 'description', 'image', 'views', 'category_id', 'author_id', 'created_at'])
             ->where('status', 'published')->paginate(10);
+
         $posts->getCollection()->transform(function ($post) {
-            $post->likesCount = $post->likes() ?? 0;
+            $post->tags = $post->tags();
+            $post->category = $post->category();
+            $post->isLiked = $post->getIsLikedAttribute();
+            $post->likesCount = $post->getLikesCountAttribute() ?? 0;
+            $post->commentsCount = $post->getCommentsCountAttribute();
+            $post->createdAt = $post->getCreatedAtAttribute($post->created_at);
+
             return $post;
         });
+
         return Inertia::render('blog/main', [
             'posts' => $posts->items(),
             'pagination' => [
                 'current_page' => $posts->currentPage(),
+                'links' => $posts->linkCollection(),
                 'last_page' => $posts->lastPage(),
                 'per_page' => $posts->perPage(),
                 'total' => $posts->total(),
-                'links' => $posts->linkCollection(),
             ],
         ]);
     }
+
     public function show(string $slug, Post $post)
     {
         $post->status != 'published' && abort(404);
@@ -36,10 +45,10 @@ class BlogController extends Controller
         $post->likesCount = $post->likes() ?? 0;
         return Inertia::render('blog/post/main', [
             'post' => $post,
-            'category' => $post->category(),
             'tags' => $post->tags(),
+            'category' => $post->category(),
+            'isLiked' => $post->getIsLikedAttribute(),
             'comments' => $post->comments()->with('user')->latest()->get(),
-            'isLiked' => $post->getIsLikedAttribute()
         ]);
     }
 }

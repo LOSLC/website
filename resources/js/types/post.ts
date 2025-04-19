@@ -6,28 +6,29 @@ export interface Author {
 
 export interface Post {
     id: number;
-    title: string;
-    description: string;
-    content: string;
-    slug: string;
-    image: string | null;
-    isLiked: boolean | null;
-    likesCount: number;
-    views: number;
-    created_at: string;
-    updated_at: string;
-    author: Author;
     tags: Tag[];
-    categories: Category[];
+    slug: string;
+    title: string;
+    views: number;
+    author: Author;
+    content: string;
+    category: Category;
+    updated_at: string;
+    likesCount: number;
+    created_at: string;
+    description: string;
+    image: string | null;
+    commentsCount: number;
+    isLiked: boolean | null;
 }
 
 export interface Category {
     id: number;
     name: string;
-    description: string | null;
+    posts: Post[];
     createdAt: string;
     updatedAt: string;
-    posts: Post[];
+    description: string | null;
 }
 
 export interface Tag {
@@ -36,24 +37,24 @@ export interface Tag {
 }
 
 export interface Props {
-    posts: Post[];
-    categories: Category[];
-    tags: Tag[];
     post: Post;
+    tags: Tag[];
+    posts: Post[];
     category: Category;
+    categories: Category[];
     pagination: Pagination;
 }
 
 export interface PaginationLink {
-    url: string | null;
     label: string;
     active: boolean;
+    url: string | null;
 }
 
 export interface Pagination {
-    current_page: number;
-    lastPage: number;
-    perPage: number;
     total: number;
+    perPage: number;
+    lastPage: number;
+    current_page: number;
     links: PaginationLink[];
 }
