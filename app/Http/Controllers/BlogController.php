@@ -41,13 +41,21 @@ class BlogController extends Controller
     public function show(string $slug, Post $post)
     {
         $post->status != 'published' && abort(404);
+        $post = Post::with(['tags', 'category', 'author'])
+            ->select(['id', 'title', 'slug', 'description', 'content', 'image', 'views', 'category_id', 'author_id', 'created_at'])
+            ->where('slug', $slug)
+            ->where('status', 'published')
+            ->firstOrFail();
         $post->update(['views' => $post->views + 1]);
-        $post->likesCount = $post->getLikesCountAttribute() ?? 0;
+        $post->isLiked = $post->getIsLikedAttribute();
+        $post->likesCount = $post->getLikesCountAttribute();
+        $post->commentsCount = $post->getCommentsCountAttribute();
+        $post->createdAt = $post->getCreatedAtAttribute($post->created_at);
+
         return Inertia::render('blog/post/main', [
             'post' => $post,
             'tags' => $post->tags(),
             'category' => $post->category(),
-            'isLiked' => $post->getIsLikedAttribute(),
             'comments' => $post->comments()->with('user')->latest()->get(),
         ]);
     }
