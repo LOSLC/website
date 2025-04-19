@@ -52,7 +52,12 @@ class Post extends Model
     // Get attributes
     public function getCommentsCountAttribute(): int
     {
-        return $this->comments()->count();
+        return $this->comments()->count() ?? 0;
+    }
+
+    public function getLikesCountAttribute(): int
+    {
+        return $this->likes()->count() ?? 0;
     }
 
     public function getIsLikedAttribute(): bool
@@ -63,11 +68,6 @@ class Post extends Model
     public function getCreatedAtAttribute(string $value): string
     {
         return Carbon::parse($value)->format('d M Y');
-    }
-
-    public function getLikesCountAttribute(): int
-    {
-        return $this->likes()->count();
     }
 
 }

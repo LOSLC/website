@@ -1,9 +1,10 @@
 import Layout from '@/components/blog/layout';
 import PostContent from '@/components/blog/post/post-content';
+import { Badge } from '@/components/ui/badge';
 import { BreadcrumbItem } from '@/types';
 import { Props } from '@/types/post';
 import { Head } from '@inertiajs/react';
-import { Eye, Heart } from 'lucide-react';
+import { Eye, Heart, Tag } from 'lucide-react';
 
 export default function postPage(props: Props) {
     const breadcrumbs: BreadcrumbItem[] = [
@@ -34,6 +35,22 @@ export default function postPage(props: Props) {
                                 <Eye />
                                 {props.post.views}
                             </span>
+                        </div>
+                        <div className="my-4">
+                            <h3 className="text-primary flex items-center gap-2 text-lg font-bold">
+                                <Tag />
+                                Tags:
+                            </h3>
+                            <div>
+                                {props.tags.map((tag) => (
+                                    <Badge variant={'outline'} key={tag.id} className="">
+                                        {tag.name}
+                                    </Badge>
+                                ))}
+                            </div>
+                        </div>
+                        <div className="mt-4">
+                            <h3>Comments: {props.post.commentsCount}</h3>
                         </div>
                     </div>
                 </div>
