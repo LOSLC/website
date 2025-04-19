@@ -34,7 +34,9 @@ export default function StaffMember({ profile }: { profile: StaffProfile }) {
       </CardHeader>
       <CardContent className="px-4 sm:px-6">
         <div className="flex justify-center">
-          <span className="text-center text-foreground/70 text-sm sm:text-base">{profile.bio}</span>
+          <span className="text-center text-foreground/70 text-sm sm:text-base">
+            {profile.bio}
+          </span>
         </div>
       </CardContent>
       <CardFooter className="h-full px-4 sm:px-6">
