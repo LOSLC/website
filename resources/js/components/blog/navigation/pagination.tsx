@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button';
 import { Pagination } from '@/types/post';
 import { router } from '@inertiajs/react';
 
@@ -5,7 +6,7 @@ export default function Paginator({ pagination }: { pagination: Pagination }) {
     return (
         <div className="mt-4 flex justify-center gap-2">
             {pagination.links.map((link, index) => (
-                <button
+                <Button
                     key={index}
                     disabled={!link.url}
                     onClick={() => router.visit(link.url || '#')}
@@ -14,7 +15,7 @@ export default function Paginator({ pagination }: { pagination: Pagination }) {
                     } ${!link.url ? 'cursor-default opacity-50' : ''}`}
                 >
                     {link.label.replace('&laquo;', '«').replace('&raquo;', '»')}
-                </button>
+                </Button>
             ))}
         </div>
     );

@@ -24,7 +24,7 @@ export default function Navbar({ className }: { className?: string }) {
   ];
 
   return (
-    <header className="top-0 z-20 sticky mb-4 flex justify-center">
+    <header className="top-0 z-20 w-full sticky mb-4 flex justify-center">
       <nav className="border-b-border backdrop-blur-2xl bg-background/50 sticky container flex items-center justify-between border-b p-4">
         <Link href="/" className="cursor-default text-2xl font-bold uppercase">
           loslc
