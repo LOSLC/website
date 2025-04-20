@@ -11,4 +11,8 @@ class PublicController extends Controller
         return Inertia::render('home');
     }
 
+    public function about()
+    {
+        return Inertia::render('about');
+    }
 }
