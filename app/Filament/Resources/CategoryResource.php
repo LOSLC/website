@@ -24,7 +24,7 @@ class CategoryResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->minLength(2)
-                    ->unique()
+                    ->unique(ignorable: fn($record) => $record)
                     ->columnSpanFull()
                     ->maxLength(255),
                 Forms\Components\Textarea::make('description')
