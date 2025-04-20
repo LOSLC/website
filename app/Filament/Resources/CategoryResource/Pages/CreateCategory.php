@@ -3,8 +3,8 @@
 namespace App\Filament\Resources\CategoryResource\Pages;
 
 use App\Filament\Resources\CategoryResource;
-use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
+use Filament\Actions;
 
 class CreateCategory extends CreateRecord
 {
@@ -13,6 +13,9 @@ class CreateCategory extends CreateRecord
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         $data['author_id'] = auth()->user()->id;
+        if ($data['slug'] == null) {
+            $data['slug'] = str($data['name'])->slug();
+        }
         return $data;
     }
 

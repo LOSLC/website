@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    protected $fillable = ["name", "description", "author_id"];
+    protected $fillable = ["name", "description", "slug", "author_id"];
 
     public function posts(): HasMany
     {
