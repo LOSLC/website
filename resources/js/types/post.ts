@@ -41,6 +41,7 @@ export interface Props {
     tags: Tag[];
     posts: Post[];
     category: Category;
+    comments: Comment[];
     categories: Category[];
     pagination: Pagination;
 }
@@ -57,4 +58,13 @@ export interface Pagination {
     lastPage: number;
     current_page: number;
     links: PaginationLink[];
+}
+
+export interface Comment {
+    id: number;
+    author: Author;
+    content: string;
+    createdAt: string;
+    updatedAt: string;
+    parent?: Comment;
 }

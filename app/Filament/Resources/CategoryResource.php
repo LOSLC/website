@@ -23,9 +23,14 @@ class CategoryResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required()
+                    ->placeholder('My Category')
                     ->minLength(2)
-                    ->unique()
-                    ->columnSpanFull()
+                    ->unique(ignorable: fn($record) => $record)
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('slug')
+                    ->placeholder('my-category')
+                    ->minLength(2)
+                    ->unique(ignorable: fn($record) => $record)
                     ->maxLength(255),
                 Forms\Components\Textarea::make('description')
                     ->maxLength(1000)
@@ -41,7 +46,11 @@ class CategoryResource extends Resource
                 TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
+                TextColumn::make('slug')
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('description')
+                    ->limit(30)
                     ->searchable(),
                 TextColumn::make('author.name')
                     ->searchable(),

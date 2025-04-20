@@ -16,4 +16,5 @@ class EditTag extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+
 }

@@ -12,7 +12,7 @@ export default function Layout({ children, breadcrumbs = [] }: Props) {
             <main className="flex min-h-screen w-full justify-center pb-6">
                 <div className="container">
                     <Breadcrumbs breadcrumbs={breadcrumbs} />
-                    <div className="mt-4">{children}</div>
+                    <div className="mt-4 p-4">{children}</div>
                 </div>
             </main>
         </>

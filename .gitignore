@@ -22,5 +22,7 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+composer.lock
 bun.*
 tailwind.config.js
+Dockerfile

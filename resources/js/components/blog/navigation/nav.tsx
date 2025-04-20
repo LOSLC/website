@@ -24,8 +24,8 @@ export default function Navbar() {
     ];
 
     return (
-        <header className="bg-background/50 fixed top-0 z-20 mb-4 flex w-full justify-center border-b backdrop-blur-2xl">
-            <nav className="container flex items-center justify-between p-4">
+        <header className="bg-background/50 sticky top-0 z-20 mb-4 flex w-full justify-center border-b backdrop-blur-2xl">
+            <nav className="container flex items-center justify-between p-2">
                 <Link href="/" className="cursor-default text-2xl font-bold uppercase">
                     loslc
                 </Link>
@@ -41,7 +41,7 @@ export default function Navbar() {
                 </ul>
                 <div className="flex items-center gap-2">
                     <ThemeSwitch />
-                    <Link href="/login" className={`uppercase ${buttonVariants({ variant: 'default' })}`}>
+                    <Link href="/login" className={`uppercase ${buttonVariants({ variant: 'default', size: 'sm' })}`}>
                         Login
                     </Link>
                 </div>
