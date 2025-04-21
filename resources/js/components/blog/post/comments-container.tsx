@@ -1,18 +1,24 @@
-import { Comment as CommentType } from '@/types/post';
+import { Comment as CommentType, Post as PostType } from '@/types/post';
+import { Reply } from 'lucide-react';
+import { useState } from 'react';
+import CommentForm from './comment-form';
 
-export default function CommentsContainer({ comments }: { comments: CommentType[] }) {
+export default function CommentsContainer({ comments, post }: { comments: CommentType[]; post: PostType }) {
     return (
         <div className="mt-10">
             {comments.map((comment) => (
-                <Comment key={comment.id} comment={comment} />
+                <Comment key={comment.id} comment={comment} post={post} />
             ))}
         </div>
     );
 }
 
-function Comment({ comment }: { comment: CommentType }) {
+function Comment({ comment, post }: { comment: CommentType; post: PostType }) {
+    const [isHovered, setIsHovered] = useState(false);
+    const [showReplyForm, setShowReplyForm] = useState(false);
+
     return (
-        <div className="my-4">
+        <div className="my-4" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
             <div className="flex items-start gap-2">
                 <div>
                     <img src={comment.author.avatar ?? '/assets/img/user-profile.png'} alt={comment.author.name} className="h-8 w-8 rounded-full" />
@@ -22,8 +28,31 @@ function Comment({ comment }: { comment: CommentType }) {
                         <h4 className="font-medium">{comment.author.name}</h4>
                         <span>·</span>
                         <span className="text-muted-foreground text-sm">{comment.createdAt}</span>
+                        {isHovered && (
+                            <button
+                                onClick={() => setShowReplyForm(!showReplyForm)}
+                                className="text-primary ml-2 flex cursor-pointer items-end gap-2 text-sm hover:underline"
+                            >
+                                <Reply />
+                                Répondre
+                            </button>
+                        )}
                     </div>
                     <p className="text-secondary-foreground">{comment.content}</p>
+                    {showReplyForm && (
+                        <div className="mt-2 ml-4">
+                            <CommentForm post={post} parentId={comment.id} onSuccess={() => setShowReplyForm(false)} />
+                        </div>
+                    )}
+
+                    {/* Replies */}
+                    {comment.replies && comment.replies.length > 0 && (
+                        <div className="border-l-muted-foreground/20 mt-2 ml-8 space-y-4 border-l pl-4">
+                            {comment.replies.map((reply) => (
+                                <Comment key={reply.id} comment={reply} post={post} />
+                            ))}
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

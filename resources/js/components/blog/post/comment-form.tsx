@@ -1,37 +1,49 @@
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { type SharedData } from '@/types';
-import { Props } from '@/types/post';
+import { Post as PostType } from '@/types/post';
 import { useForm, usePage } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 
-export default function CommentForm({ props }: { props: Props }) {
+export default function CommentForm({ post, parentId, onSuccess }: { post: PostType; parentId?: number; onSuccess?: () => void }) {
     const { auth } = usePage<SharedData>().props;
-    const { setData, post, processing, errors } = useForm({ comment: '' });
+    const {
+        data,
+        setData,
+        post: submit,
+        processing,
+        errors,
+    } = useForm({
+        comment: '',
+        parent_id: parentId || null,
+    });
 
     const handleCommentSubmit: FormEventHandler = (e) => {
         e.preventDefault();
-        post(route('blog.comment', { slug: props.post.slug, post: props.post.id }), {
+        submit(route('blog.comment', { slug: post.slug, post: post.id }), {
             preserveScroll: true,
+            onSuccess: () => {
+                setData('comment', '');
+                onSuccess?.();
+            },
         });
     };
 
     return (
-        <>
-            <form onSubmit={handleCommentSubmit}>
-                <Textarea
-                    required
-                    name="comment"
-                    className="mb-2"
-                    disabled={auth.user ? false : true}
-                    onChange={(e) => setData('comment', e.target.value)}
-                    placeholder={auth.user ? 'Write a comment...' : 'You must be logged in to comment'}
-                />
-                {errors.comment && <div className="font-medium text-red-500">{errors.comment}</div>}
-                <Button type="submit" className="mt-2 cursor-pointer" variant={'default'} disabled={auth.user || processing ? false : true}>
-                    Post
-                </Button>
-            </form>
-        </>
+        <form onSubmit={handleCommentSubmit} className="mt-2">
+            <Textarea
+                required
+                value={data.comment}
+                onChange={(e) => setData('comment', e.target.value)}
+                placeholder={auth.user ? '' : 'You must be logged in to comment.'}
+                disabled={!auth.user}
+                name="comment"
+                className="mb-2"
+            />
+            {errors.comment && <div className="mb-2 text-sm text-red-500">{errors.comment}</div>}
+            <Button type="submit" disabled={processing || !auth.user} size="sm" className="cursorr-pointer">
+                Post
+            </Button>
+        </form>
     );
 }

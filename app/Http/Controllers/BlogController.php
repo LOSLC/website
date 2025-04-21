@@ -13,6 +13,11 @@ use App\Models\Category;
 
 class BlogController extends Controller
 {
+
+    /**
+     * Show lastest 10 Posts 
+     * @return Response
+     */
     public function index(): Response
     {
         $posts = Post::latest()->with(['tags', 'category', 'author'])
@@ -40,6 +45,13 @@ class BlogController extends Controller
         ]);
     }
 
+
+    /**
+     * Show a Post
+     * @param string $slug Post slug
+     * @param \App\Models\Post $post Post model
+     * @return Response 
+     */
     public function show(string $slug, Post $post): Response
     {
         $post->status != 'published' && abort(404);
@@ -57,19 +69,43 @@ class BlogController extends Controller
         $post->commentsCount = $post->getCommentsCountAttribute();
         $post->createdAt = $post->getCreatedAtAttribute($post->created_at);
 
-        $comments = $post->comments()->with(['author', 'parent'])->latest()->get();
+        $comments = $post->comments()
+            ->whereNull('parent_id')
+            ->with([
+                'author:id,name,avatar_url',
+                'replies' => function ($query) {
+                    $query->with([
+                        'author:id,name,avatar_url',
+                        'replies' => function ($subQuery) {
+                            $subQuery->with(['author:id,name,avatar_url']);
+                        }
+                    ]);
+                }
+            ])
+            ->orderBy('created_at', 'desc')
+            ->get();
 
-        $comments->transform(function ($comment) {
+        $transformComment = function ($comment) use (&$transformComment) {
             $comment->createdAt = $comment->getDateAttribute($comment->created_at);
             $comment->updatedAt = $comment->getDateAttribute($comment->updated_at);
-            $comment->replies = $comment->replies();
+
+            if ($comment->replies) {
+                $comment->replies->each(function ($reply) use ($transformComment) {
+                    $transformComment($reply);
+                });
+            }
+
             return $comment;
+        };
+
+        $comments->transform(function ($comment) use ($transformComment) {
+            return $transformComment($comment);
         });
 
         return Inertia::render('blog/post/main', [
             'post' => $post,
-            'tags' => $post->tags(),
-            'category' => $post->category(),
+            'tags' => $post->tags, // Utiliser la relation chargée plutôt que la méthode
+            'category' => $post->category,
             'comments' => $comments,
         ]);
     }
@@ -81,6 +117,7 @@ class BlogController extends Controller
             'author_id' => auth()->user()->id,
             'post_id' => $post->id,
             'content' => $request->comment,
+            'parent_id' => $request->parent_id ?? null,
         ]);
 
         return Redirect::route('blog.show', [$post->slug, $post->id]);

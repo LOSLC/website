@@ -52,8 +52,8 @@ export default function PostPage(props: Props) {
                                 <h3 className="my-4 text-lg font-bold">
                                     {props.post.commentsCount} Comment{props.post.commentsCount > 1 ? 's' : ''}
                                 </h3>
-                                <CommentForm props={props} />
-                                <CommentsContainer comments={props.comments} />
+                                <CommentForm post={props.post} />
+                                <CommentsContainer comments={props.comments} post={props.post} />
                             </div>
                         </section>
                     </div>

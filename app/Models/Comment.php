@@ -33,7 +33,8 @@ class Comment extends Model
 
     public function replies(): HasMany
     {
-        return $this->hasMany(Comment::class, 'parent_id');
+        return $this->hasMany(Comment::class, 'parent_id')
+            ->orderBy('created_at', 'desc');
     }
 
     public function getDateAttribute(string $value): string

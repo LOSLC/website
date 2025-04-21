@@ -66,6 +66,5 @@ export interface Comment {
     content: string;
     createdAt: string;
     updatedAt: string;
-    parent: Comment | null;
-    replies: Comment | null;
+    replies: Comment[];
 }
