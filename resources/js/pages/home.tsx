@@ -1,14 +1,16 @@
-import Layout from "@/components/blog/layout";
-import HomeHeader from "./header";
-import Hero from "@/components/home/hero";
+import Layout from '@/components/blog/layout';
+import Hero from '@/components/home/hero';
+import { Head } from '@inertiajs/react';
+import HomeHeader from './header';
 
 export default function Home() {
-  return (
-    <Layout>
-      <div className="relative bg-background flex-col w-full h-screen scroll-smooth">
-        <HomeHeader />
-        <Hero />
-      </div>
-    </Layout>
-  );
+    return (
+        <Layout>
+            <Head title="Home" />
+            <div className="bg-background relative h-screen w-full flex-col scroll-smooth">
+                <HomeHeader />
+                <Hero />
+            </div>
+        </Layout>
+    );
 }

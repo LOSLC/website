@@ -34,7 +34,7 @@ function Comment({ comment, post }: { comment: CommentType; post: PostType }) {
                                 className="text-primary ml-2 flex cursor-pointer items-end gap-2 text-sm hover:underline"
                             >
                                 <Reply />
-                                Répondre
+                                Reply
                             </button>
                         )}
                     </div>
