@@ -36,7 +36,7 @@ class Comment extends Model
         return $this->hasMany(Comment::class, 'parent_id');
     }
 
-    public function getCreatedAtAttribute(string $value): string
+    public function getDateAttribute(string $value): string
     {
         return Carbon::parse($value)->format('d M Y');
     }

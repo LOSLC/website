@@ -5,8 +5,8 @@ import { BreadcrumbItem } from '@/types';
 import { Props, Tag as TagType } from '@/types/post';
 import { Head } from '@inertiajs/react';
 import { Heart, Tag } from 'lucide-react';
-import CommentForm from './comment-form';
-import CommentsContainer from './comments-container';
+import CommentForm from '../../../components/blog/post/comment-form';
+import CommentsContainer from '../../../components/blog/post/comments-container';
 
 export default function PostPage(props: Props) {
     const breadcrumbs: BreadcrumbItem[] = [

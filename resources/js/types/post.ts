@@ -66,5 +66,6 @@ export interface Comment {
     content: string;
     createdAt: string;
     updatedAt: string;
-    parent?: Comment;
+    parent: Comment | null;
+    replies: Comment | null;
 }

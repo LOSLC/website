@@ -18,8 +18,9 @@ function Comment({ comment }: { comment: CommentType }) {
                     <img src={comment.author.avatar ?? '/assets/img/user-profile.png'} alt={comment.author.name} className="h-8 w-8 rounded-full" />
                 </div>
                 <div>
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-1">
                         <h4 className="font-medium">{comment.author.name}</h4>
+                        <span>·</span>
                         <span className="text-muted-foreground text-sm">{comment.createdAt}</span>
                     </div>
                     <p className="text-secondary-foreground">{comment.content}</p>

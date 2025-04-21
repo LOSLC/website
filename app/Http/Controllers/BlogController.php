@@ -16,7 +16,7 @@ class BlogController extends Controller
     public function index(): Response
     {
         $posts = Post::latest()->with(['tags', 'category', 'author'])
-            ->select(['id', 'title', 'slug', 'description', 'image', 'views', 'category_id', 'author_id', 'created_at'])
+            ->select(['id', 'title', 'slug', 'description', 'image', 'category_id', 'author_id', 'created_at'])
             ->where('status', 'published')->paginate(10);
 
         $posts->getCollection()->transform(function ($post) {
@@ -43,20 +43,26 @@ class BlogController extends Controller
     public function show(string $slug, Post $post): Response
     {
         $post->status != 'published' && abort(404);
+
         $post = Post::select(['id', 'title', 'slug', 'description', 'content', 'image', 'views', 'category_id', 'author_id', 'created_at'])
             ->with(['tags', 'category', 'author'])
             ->where('slug', $slug)
             ->where('status', 'published')
             ->firstOrFail();
+
         $post->update(['views' => $post->views + 1]);
+
         $post->isLiked = $post->getIsLikedAttribute();
         $post->likesCount = $post->getLikesCountAttribute();
         $post->commentsCount = $post->getCommentsCountAttribute();
         $post->createdAt = $post->getCreatedAtAttribute($post->created_at);
 
         $comments = $post->comments()->with(['author', 'parent'])->latest()->get();
+
         $comments->transform(function ($comment) {
-            $comment->createdAt = $comment->getCreatedAtAttribute($comment->created_at);
+            $comment->createdAt = $comment->getDateAttribute($comment->created_at);
+            $comment->updatedAt = $comment->getDateAttribute($comment->updated_at);
+            $comment->replies = $comment->replies();
             return $comment;
         });
 
