@@ -1,9 +1,13 @@
 import { buttonVariants } from '@/components/ui/button';
 import ThemeSwitch from '@/components/ui/theming/theme-switch';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { Link as NavLink } from './link';
+import { SharedData } from '@/types';
+import { User2 } from 'lucide-react';
 
 export default function Navbar() {
+    const { auth } = usePage<SharedData>().props;
+
     const navLinks: NavLink[] = [
         {
             name: 'Home',
@@ -41,9 +45,17 @@ export default function Navbar() {
                 </ul>
                 <div className="flex items-center gap-2">
                     <ThemeSwitch />
-                    <Link href="/login" className={`uppercase ${buttonVariants({ variant: 'default', size: 'sm' })}`}>
-                        Login
-                    </Link>
+                    {
+                        auth.user ? (
+                            <Link className='flex items-center gap-2' href='/settings'>
+                                <User2 className='h-4 w-4' /> {auth.user.name}
+                            </Link>
+                        ) :
+                            <Link href="/login" className={`uppercase ${buttonVariants({ variant: 'default', size: 'sm' })}`}>
+                                Login
+                            </Link>
+                    }
+
                 </div>
             </nav>
         </header>
