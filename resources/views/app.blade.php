@@ -3,6 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Meta tag to help with Brave browser resource blocking -->
+        <meta name="brave-rewards-verification" content="development">
 
         {{-- Inline script to detect system dark mode preference and apply it immediately --}}
         <script>
