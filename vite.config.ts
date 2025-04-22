@@ -22,4 +22,11 @@ export default defineConfig({
             'ziggy-js': resolve(__dirname, 'vendor/tightenco/ziggy'),
         },
     },
+    server: {
+        // Configuration to help with Brave's blocking behavior
+        hmr: {
+            protocol: 'ws',
+            host: 'localhost',
+        },
+    },
 });
