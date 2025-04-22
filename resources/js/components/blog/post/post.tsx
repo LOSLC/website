@@ -5,7 +5,7 @@ import { ChevronRight, Heart, MessageSquare } from 'lucide-react';
 
 export default function PostComponent({ post }: { post: Post }) {
     return (
-        <article className="motion-preset-blur-down bg-card mb-4 flex items-center justify-center rounded-xl border p-4 shadow max-w-3xl">
+        <article className="motion-preset-blur-down bg-card mb-4 flex max-w-3xl items-center justify-center rounded-xl border p-4 shadow">
             <Link
                 href={route('blog.show', { slug: post.slug, post: post.id })}
                 className="flex w-full cursor-default flex-col items-start justify-between gap-4 md:flex-row"

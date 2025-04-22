@@ -19,7 +19,7 @@ export interface Post {
     description: string;
     image: string | null;
     commentsCount: number;
-    isLiked: boolean | null;
+    isLiked: boolean;
 }
 
 export interface Category {

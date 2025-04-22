@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comment;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
+use App\Models\Category;
+use App\Models\Comment;
 use Inertia\Response;
 use Inertia\Inertia;
 use App\Models\Post;
-use App\Models\Category;
 
 class BlogController extends Controller
 {
@@ -103,7 +102,7 @@ class BlogController extends Controller
 
     }
 
-    public function comment(string $slug, Post $post, Request $request): RedirectResponse
+    public function comment(Request $request, Post $post): RedirectResponse
     {
         $request->validate(['comment' => ['required', 'string', 'max:1500']]);
 
@@ -122,7 +121,14 @@ class BlogController extends Controller
 
         Comment::create($data);
 
-        return Redirect::route('blog.show', [$post->slug, $post->id]);
+        return redirect()->route('blog.show', [$post->slug, $post->id]);
+    }
+
+    public function like(Request $request, Post $post): RedirectResponse
+    {
+        $post->likes()->toggle($request->user()->id);
+
+        return redirect()->route('blog.show', [$post->slug, $post->id]);
     }
 
     public function category(string $slug)

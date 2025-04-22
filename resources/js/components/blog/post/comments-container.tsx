@@ -56,7 +56,7 @@ function Comment({ comment, post }: { comment: CommentType; post: PostType }) {
                                     <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${showReplies ? 'rotate-180' : ''}`} />
                                 </Button>
                             ) : (
-                                <></>
+                                ''
                             )}
                         </CollapsibleTrigger>
                         {/* Replies */}

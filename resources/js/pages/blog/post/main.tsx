@@ -1,10 +1,12 @@
 import Layout from '@/components/blog/layout';
 import PostContent from '@/components/blog/post/post-content';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { BreadcrumbItem } from '@/types';
 import { Props, Tag as TagType } from '@/types/post';
-import { Head } from '@inertiajs/react';
+import { Head, useForm } from '@inertiajs/react';
 import { Heart, Tag } from 'lucide-react';
+import { FormEventHandler } from 'react';
 import CommentForm from '../../../components/blog/post/comment-form';
 import CommentsContainer from '../../../components/blog/post/comments-container';
 
@@ -39,13 +41,13 @@ export default function PostPage(props: Props) {
                                 {/* Tags */}
                                 <div className="my-4 flex items-center gap-2">
                                     <h3 className="flex items-center gap-2 text-lg font-bold">
-                                        <Tag className="text-primary" /> Tags:
+                                        <Tag /> Tags:
                                     </h3>
                                     <Tags tags={props.post.tags} />
                                 </div>
                                 {/* Likes */}
-                                <div className="flex items-center gap-2">
-                                    <Heart /> {props.post.likesCount}
+                                <div>
+                                    <LikeBtn props={props} />
                                 </div>
                             </div>
                             <div className="mt-4 border-t">
@@ -72,5 +74,29 @@ function Tags({ tags }: { tags: TagType[] }) {
                 </Badge>
             ))}
         </div>
+    );
+}
+
+function LikeBtn({ props }: { props: Props }) {
+    const isLiked = props.post.isLiked;
+    const { data, post: submit, processing } = useForm({ isLiked: !props.post.isLiked });
+
+    const handleLikeSubmit: FormEventHandler = (e) => {
+        e.preventDefault();
+        submit(route('blog.like', { post: props.post.id }), { preserveScroll: true });
+    };
+
+    return (
+        <form method="post">
+            <input type="hidden" name="isLiked" value={data.isLiked.toString()} />
+            <Button
+                variant={isLiked ? 'default' : 'secondary'}
+                className="cursor-pointer rounded-full"
+                onClick={handleLikeSubmit}
+                disabled={processing}
+            >
+                <Heart /> {props.post.likesCount}
+            </Button>
+        </form>
     );
 }

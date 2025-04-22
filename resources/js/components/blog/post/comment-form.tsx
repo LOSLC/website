@@ -20,7 +20,7 @@ export default function CommentForm({ post, parentId, onSuccess }: { post: PostT
 
     const handleCommentSubmit: FormEventHandler = (e) => {
         e.preventDefault();
-        submit(route('blog.comment', { slug: post.slug, post: post.id }), {
+        submit(route('blog.comment', { post: post.id }), {
             preserveScroll: true,
             onSuccess: () => {
                 setData('comment', '');
