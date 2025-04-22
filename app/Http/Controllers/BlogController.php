@@ -74,51 +74,53 @@ class BlogController extends Controller
             ->with([
                 'author:id,name,avatar_url',
                 'replies' => function ($query) {
-                    $query->with([
-                        'author:id,name,avatar_url',
-                        'replies' => function ($subQuery) {
-                            $subQuery->with(['author:id,name,avatar_url']);
-                        }
-                    ]);
+                    $query->with('author:id,name,avatar_url');
                 }
             ])
             ->orderBy('created_at', 'desc')
             ->get();
 
-        $transformComment = function ($comment) use (&$transformComment) {
+        $comments->transform(function ($comment) {
             $comment->createdAt = $comment->getDateAttribute($comment->created_at);
             $comment->updatedAt = $comment->getDateAttribute($comment->updated_at);
 
             if ($comment->replies) {
-                $comment->replies->each(function ($reply) use ($transformComment) {
-                    $transformComment($reply);
+                $comment->replies->each(function ($reply) {
+                    $reply->createdAt = $reply->getDateAttribute($reply->created_at);
+                    $reply->updatedAt = $reply->getDateAttribute($reply->updated_at);
                 });
             }
 
             return $comment;
-        };
-
-        $comments->transform(function ($comment) use ($transformComment) {
-            return $transformComment($comment);
         });
 
         return Inertia::render('blog/post/main', [
             'post' => $post,
-            'tags' => $post->tags, // Utiliser la relation chargée plutôt que la méthode
+            'tags' => $post->tags,
             'category' => $post->category,
             'comments' => $comments,
         ]);
+
     }
 
     public function comment(string $slug, Post $post, Request $request): RedirectResponse
     {
         $request->validate(['comment' => ['required', 'string', 'max:1500']]);
-        Comment::create([
+
+        $data = [
             'author_id' => auth()->user()->id,
             'post_id' => $post->id,
             'content' => $request->comment,
-            'parent_id' => $request->parent_id ?? null,
-        ]);
+        ];
+
+        if ($request->parent_id) {
+            $parent = Comment::find($request->parent_id);
+            $parent->parent_id ? $data['parent_id'] = $parent->parent_id : $data['parent_id'] = $parent->id;
+        } else {
+            $data['parent_id'] = null;
+        }
+
+        Comment::create($data);
 
         return Redirect::route('blog.show', [$post->slug, $post->id]);
     }
