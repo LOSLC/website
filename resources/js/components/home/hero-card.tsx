@@ -4,9 +4,14 @@ export default function HeroCard({
   icon,
   title,
   content,
-}: { icon: ReactNode; title: string; content: string }) {
+  className,
+}: { icon: ReactNode; title: string; content: ReactNode; className?: string }) {
   return (
-    <div className="flex flex-col overflow-hidden rounded-xl min-h-[300px] border cursor-default grow w-[400px] md:w-[500px]">
+    <div
+      className={`flex flex-col overflow-hidden rounded-xl min-h-[300px]
+                  border cursor-default w-[400px] md:w-[500px] ${className}
+                  bg-card`}
+    >
       <div className="border-b bg-accent">
         <div className="font-medium flex gap-2 p-4">
           {icon}

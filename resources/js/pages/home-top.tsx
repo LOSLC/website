@@ -1,12 +1,11 @@
 import JoinButton from "@/components/home/join-button";
 import HomeTitle from "@/components/home/title";
-import { Button } from "@/components/ui/button";
 
 export default function HomeHeader() {
   return (
-    <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12 xl:gap-24 px-4 sm:px-6 md:px-8 lg:px-12">
+    <div className=" blur-none flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12 xl:gap-24 px-4 sm:px-6 md:px-8 lg:px-12 z-20">
       <div className="flex flex-col gap-6 md:gap-8 mt-6 md:mt-10 w-full lg:max-w-[60%] xl:max-w-[50%]">
-        <div className="flex w-full min-h-[20vh] justify-start md:items-center backdrop-blur-2xl">
+        <div className="flex w-full min-h-[20vh] justify-start md:items-center">
           <HomeTitle />
         </div>
 
@@ -24,7 +23,6 @@ export default function HomeHeader() {
       </div>
 
       <div className="relative w-full max-w-[500px] lg:w-[50%] xl:w-[40%] aspect-square motion-preset-rebound motion-preset-oscillate drop-shadow-lg">
-        {/* Top Center Image (Laptop) */}
         <img
           src="/assets/img/hero/Laptop.png"
           alt="Laptop"
