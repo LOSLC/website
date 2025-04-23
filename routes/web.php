@@ -8,14 +8,15 @@ use App\Models\Post;
 
 Route::get('/', [PublicController::class, 'home'])->name('home');
 Route::get('/about', [PublicController::class, 'about'])->name('about');
+Route::get('/store', [PublicController::class, 'store'])->name('store');
 
 Route::name('blog.')->prefix('blog')->group(
     function () {
         Route::get('/', [BlogController::class, 'index'])->name('index');
+
         Route::get('/posts/{slug}-{post}', [BlogController::class, 'show'])
             ->where(['slug' => '[A-Za-z0-9\-]+', 'post' => '[0-9]+'])->name('show');
-        Route::post('/posts/{slug}-{post}/comment', [BlogController::class, 'comment'])
-            ->where(['slug' => '[A-Za-z0-9\-]+', 'post' => '[0-9]+'])->name('comment');
+
         Route::get('/categories/{slug}', [BlogController::class, 'category'])->name('category');
     }
 );
@@ -23,8 +24,12 @@ Route::name('blog.')->prefix('blog')->group(
 Route::middleware(['auth', 'verified'])->group(
     function () {
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+        Route::post('/blog/posts/{post}/comment', [BlogController::class, 'comment'])->name('blog.comment');
+
+        Route::delete('/blog/comment/{comment}/delete', [BlogController::class, 'deleteComment'])->name('blog.comment.delete');
+
         Route::post('/blog/posts/{post}/like', [BlogController::class, 'like'])->name('blog.like');
-        Route::post('/blog/posts/{post}/dislike', [BlogController::class, 'dislike'])->name('blog.dislike');
     }
 );
 

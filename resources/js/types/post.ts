@@ -19,7 +19,7 @@ export interface Post {
     description: string;
     image: string | null;
     commentsCount: number;
-    isLiked: boolean | null;
+    isLiked: boolean;
 }
 
 export interface Category {
@@ -66,5 +66,5 @@ export interface Comment {
     content: string;
     createdAt: string;
     updatedAt: string;
-    parent?: Comment;
+    replies: Comment[];
 }

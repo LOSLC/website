@@ -33,10 +33,12 @@ class Comment extends Model
 
     public function replies(): HasMany
     {
-        return $this->hasMany(Comment::class, 'parent_id');
+        return $this->hasMany(Comment::class, 'parent_id')
+            ->with('author:id,name,avatar_url')
+            ->orderBy('created_at', 'desc');
     }
 
-    public function getCreatedAtAttribute(string $value): string
+    public function getDateAttribute(string $value): string
     {
         return Carbon::parse($value)->format('d M Y');
     }

@@ -1,11 +1,11 @@
 import { truncateText } from '@/lib/utils';
 import { Post } from '@/types/post';
 import { Link } from '@inertiajs/react';
-import { ChevronRight, Eye, MessageSquare } from 'lucide-react';
+import { ChevronRight, Heart, MessageSquare } from 'lucide-react';
 
 export default function PostComponent({ post }: { post: Post }) {
     return (
-        <article className="motion-preset-blur-down bg-card mb-4 flex items-center justify-center rounded-xl border p-4 shadow">
+        <article className="motion-preset-blur-down bg-card mb-4 flex max-w-[1000px] items-center justify-center rounded-xl border p-4 shadow">
             <Link
                 href={route('blog.show', { slug: post.slug, post: post.id })}
                 className="flex w-full cursor-default flex-col items-start justify-between gap-4 md:flex-row"
@@ -19,18 +19,18 @@ export default function PostComponent({ post }: { post: Post }) {
                 </div>
                 <div className="flex w-full flex-col justify-between gap-2 md:w-1/2">
                     <div>
-                        <div className="tex-3xl text-primary mb-2 flex items-center justify-between font-medium">
+                        <div className="tex-2xl text-primary mb-2 flex items-center justify-between font-medium">
                             <h4 className="flex items-center gap-2">
                                 <ChevronRight />
                                 {post.category.name}
                             </h4>
                             <div className="flex items-center gap-2">
                                 <div className="flex items-center gap-2">
-                                    <Eye />
-                                    {post.views}
+                                    <Heart className="h-5 w-5" />
+                                    {post.likesCount}
                                 </div>
                                 <div className="flex items-center gap-2">
-                                    <MessageSquare />
+                                    <MessageSquare className="h-5 w-5" />
                                     {post.commentsCount}
                                 </div>
                             </div>

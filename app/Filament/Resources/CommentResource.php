@@ -6,6 +6,7 @@ use App\Filament\Resources\CommentResource\Pages;
 use Filament\Resources\Resource;
 use Filament\Tables\Table;
 use Filament\Forms\Form;
+use Filament\Forms;
 use App\Models\Comment;
 use Filament\Tables;
 
@@ -21,7 +22,8 @@ class CommentResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\Textarea::make('content')
+                    ->columnSpanFull(),
             ]);
     }
 
@@ -29,13 +31,27 @@ class CommentResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('author.name')
+                    ->sortable()
+                    ->searchable()
+                    ->label('Author'),
+                Tables\Columns\TextColumn::make('post.title')
+                    ->label('Post')
+                    ->sortable()
+                    ->searchable()
+                    ->limit(30),
+                Tables\Columns\TextColumn::make('content')
+                    ->limit(30),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime(),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\DeleteAction::make()
+                    ->requiresConfirmation(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -55,8 +71,6 @@ class CommentResource extends Resource
     {
         return [
             'index' => Pages\ListComments::route('/'),
-            'create' => Pages\CreateComment::route('/create'),
-            'edit' => Pages\EditComment::route('/{record}/edit'),
         ];
     }
 }

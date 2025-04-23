@@ -17,7 +17,7 @@ const classMap: Record<string, string> = {
     ol: 'list-decimal list-inside mb-4 pl-4',
     a: 'text-primary hover:underline',
     blockquote: 'border-l-4 border-accent pl-4 italic my-4 text-muted-foreground bg-accent/30 p-2',
-    pre: 'bg-muted p-4 mb-4 overflow-auto text-sm',
+    pre: 'bg-muted p-4 mb-4 overflow-auto text-sm rounded-md',
     code: 'bg-muted px-1 font-mono text-sm rounded',
 };
 

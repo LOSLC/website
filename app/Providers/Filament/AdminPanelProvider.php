@@ -29,6 +29,9 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->brandName('LOSLC')
+            ->brandLogo(asset('logo-dark.svg'))
+            ->brandLogoHeight('40px')
             ->login()
             ->colors([
                 'primary' => Color::hex('#5076f6'),
@@ -41,7 +44,6 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
             ])
             ->plugins([
                 FilamentEditProfilePlugin::make()
