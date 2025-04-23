@@ -8,6 +8,7 @@ use App\Models\Post;
 
 Route::get('/', [PublicController::class, 'home'])->name('home');
 Route::get('/about', [PublicController::class, 'about'])->name('about');
+Route::get('/store', [PublicController::class, 'store'])->name('store');
 
 Route::name('blog.')->prefix('blog')->group(
     function () {

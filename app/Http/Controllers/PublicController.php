@@ -10,9 +10,12 @@ class PublicController extends Controller
     {
         return Inertia::render('home');
     }
-
     public function about()
     {
         return Inertia::render('about');
+    }
+    public function store()
+    {
+        return Inertia::render('store');
     }
 }
