@@ -6,6 +6,7 @@ use App\Filament\Resources\UserResource\Pages;
 use Filament\Resources\Resource;
 use Filament\Tables\Table;
 use Filament\Forms\Form;
+use Filament\Forms;
 use Filament\Tables;
 use App\Models\User;
 
@@ -22,7 +23,20 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\Select::make('role')
+                    ->options([
+                        'user' => 'User',
+                        'author' => 'Author',
+                        'admin' => 'Admin',
+                    ])
+                    ->native(false),
+                Forms\Components\Select::make('status')
+                    ->options([
+                        'active' => 'Active',
+                        'inactive' => 'Inactive',
+                        'banned' => 'Banned',
+                    ])
+                    ->native(false),
             ]);
     }
 
@@ -30,7 +44,36 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('email')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('role')
+                    ->badge()
+                    ->color(fn(string $state): string => match ($state) {
+                        'user' => 'gray',
+                        'author' => 'info',
+                        'admin' => 'danger',
+                    })
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->color(fn(string $state): string => match ($state) {
+                        'active' => 'success',
+                        'inactive' => 'info',
+                        'banned' => 'danger',
+                    })
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
