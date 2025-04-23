@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { BreadcrumbItem } from '@/types';
 import { Props, Tag as TagType } from '@/types/post';
 import { Head, useForm } from '@inertiajs/react';
-import { Heart, Tag } from 'lucide-react';
+import { Dot, Heart, Tag } from 'lucide-react';
 import { FormEventHandler } from 'react';
 import CommentForm from '../../../components/blog/post/comment-form';
 import CommentsContainer from '../../../components/blog/post/comments-container';
@@ -30,13 +30,34 @@ export default function PostPage(props: Props) {
                     <div>
                         {/* Post primary content */}
                         <section>
-                            <h1 className="my-4 text-center text-3xl font-bold"> {props.post.title} </h1>
+                            <div className="mb-8">
+                                <h1 className="mb-4 text-center text-4xl font-bold"> {props.post.title} </h1>
+                            </div>
                             {props.post.image && <img src={`/storage/${props.post.image}`} alt={props.post.title} className="mb-4 w-full rounded" />}
                             <PostContent content={props.post.content} />
                         </section>
 
                         {/* Post secondary content */}
                         <section className="mt-10">
+                            <div className="mb-8 border-t pt-4">
+                                <div className="flex items-center gap-2">
+                                    <p>Published by :</p>
+                                    <div className="my-2 flex items-center gap-4">
+                                        <img
+                                            src={
+                                                props.post.author.avatar
+                                                    ? `/storage/avatar/${props.post.author.avatar}`
+                                                    : '/assets/img/user-profile.png'
+                                            }
+                                            alt={props.post.author.name}
+                                            className="h-8 w-8 rounded-full"
+                                        />
+                                        <h4 className="text-lg font-bold">{props.post.author.name}</h4>
+                                        <Dot />
+                                        <p className="text-muted-foreground text-sm">{props.post.created_at}</p>
+                                    </div>
+                                </div>
+                            </div>
                             <div className="flex justify-between">
                                 {/* Tags */}
                                 <div className="my-4 flex items-center gap-2">
