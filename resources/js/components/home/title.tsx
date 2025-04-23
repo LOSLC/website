@@ -10,7 +10,7 @@ export default function HomeTitle() {
         <span className="bg-gradient-to-r bg-clip-text text-transparent from-yellow-800 to-yellow-400 text-nowrap">
           Open Source
         </span>{" "}
-        lovers community
+        Lovers Community.
       </span>
     </div>
   );
