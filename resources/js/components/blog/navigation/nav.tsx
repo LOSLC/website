@@ -116,7 +116,7 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="fixed left-0 top-16 z-50 w-full bg-transparent backdrop-blur-lg sm:hidden h-screen">
+          <div className="fixed left-0 top-16 z-50 w-full bg-transparent backdrop-blur-lg sm:hidden h-screen motion-preset-blur-down">
             <div className="container p-4 bg-background">
               <ul className="flex flex-col gap-4">
                 {mobileLinks.map((link, index) => (
