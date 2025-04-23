@@ -26,3 +26,4 @@ composer.lock
 bun.*
 tailwind.config.js
 Dockerfile
+package-lock.json

@@ -123,6 +123,21 @@ class BlogController extends Controller
 
         return redirect()->route('blog.show', [$post->slug, $post->id]);
     }
+    public function deleteComment(Comment $comment): RedirectResponse
+    {
+        if (auth()->id() !== $comment->author_id) {
+            abort(403);
+        }
+
+        $post = $comment->post;
+        $comment->delete();
+
+        return redirect()->route('blog.show', [
+            'slug' => $post->slug,
+            'post' => $post->id
+        ]);
+    }
+
 
     public function like(Request $request, Post $post): RedirectResponse
     {

@@ -26,6 +26,8 @@ Route::middleware(['auth', 'verified'])->group(
 
         Route::post('/blog/posts/{post}/comment', [BlogController::class, 'comment'])->name('blog.comment');
 
+        Route::delete('/blog/comment/{comment}/delete', [BlogController::class, 'deleteComment'])->name('blog.comment.delete');
+
         Route::post('/blog/posts/{post}/like', [BlogController::class, 'like'])->name('blog.like');
     }
 );
