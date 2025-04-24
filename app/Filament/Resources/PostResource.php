@@ -66,6 +66,13 @@ class PostResource extends Resource
                             ->columnSpanFull()
                             ->minLength(32)
                             ->maxLength(255),
+                        Forms\Components\Select::make('status')
+                            ->options([
+                                'published' => 'Published',
+                                'draft' => 'Draft',
+                            ])
+                            ->default('published')
+                            ->native(false),
                     ]),
             ]);
     }
@@ -84,11 +91,13 @@ class PostResource extends Resource
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('image'),
-                Tables\Columns\SelectColumn::make('status')
-                    ->options([
-                        'draft' => 'Draft',
-                        'published' => 'Published',
-                    ]),
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->color(fn(string $state): string => match ($state) {
+                        'draft' => 'info',
+                        'published' => 'success',
+                    })
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('views')
                     ->numeric()
                     ->sortable(),
