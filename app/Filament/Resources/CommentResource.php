@@ -55,7 +55,8 @@ class CommentResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()
+                        ->requiresConfirmation(),
                 ]),
             ]);
     }
@@ -72,5 +73,10 @@ class CommentResource extends Resource
         return [
             'index' => Pages\ListComments::route('/'),
         ];
+    }
+
+    public static function canCreate(): bool
+    {
+        return false;
     }
 }
