@@ -46,7 +46,7 @@ export default function PostComponent({ post }: { post: Post }) {
                     </div>
                     <div className="my-2 flex items-start gap-4">
                         <img
-                            src={post.author.avatar ? `/storage/avatar/${post.author.avatar}` : '/assets/img/user-profile.png'}
+                            src={post.author.avatar_url ? `/storage/${post.author.avatar_url}` : '/assets/img/user-profile.png'}
                             alt={post.author.name}
                             className="h-12 w-12 rounded-full"
                         />

@@ -45,8 +45,8 @@ export default function PostPage(props: Props) {
                                     <div className="my-2 flex items-center gap-4">
                                         <img
                                             src={
-                                                props.post.author.avatar
-                                                    ? `/storage/avatar/${props.post.author.avatar}`
+                                                props.post.author.avatar_url
+                                                    ? `/storage/${props.post.author.avatar_url}`
                                                     : '/assets/img/user-profile.png'
                                             }
                                             alt={props.post.author.name}
