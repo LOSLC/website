@@ -63,7 +63,11 @@ function Comment({ comment, post }: { comment: CommentType; post: PostType }) {
         <div className="my-4 cursor-default" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
             <div className="flex items-start gap-2">
                 <div>
-                    <img src={comment.author.avatar ?? '/assets/img/user-profile.png'} alt={comment.author.name} className="h-8 w-8 rounded-full" />
+                    <img
+                        src={comment.author.avatar_url ? `/storage/${comment.author.avatar_url}` : '/assets/img/user-profile.png'}
+                        alt={comment.author.name}
+                        className="h-8 w-8 rounded-full"
+                    />
                 </div>
                 <Collapsible open={showReplies} onOpenChange={setShowReplies}>
                     <div>

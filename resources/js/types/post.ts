@@ -1,7 +1,7 @@
 export interface Author {
     id: number;
     name: string;
-    avatar: string | null;
+    avatar_url: string | null;
 }
 
 export interface Post {
