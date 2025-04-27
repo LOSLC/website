@@ -1,4 +1,3 @@
-import { Link } from "@inertiajs/react";
 import { Button, buttonVariants } from "../ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import {
@@ -18,34 +17,38 @@ export default function JoinButton() {
       </PopoverTrigger>
       <PopoverContent className="w-[150px] my-3 p-2">
         <div className="flex flex-col gap-1">
-          <Link
+          <a
             href="https://discord.gg/B3hPHmvddP"
             className={`${buttonVariants({ variant: "ghost" })} w-full justify-start gap-3`}
+            target="_blank"
           >
             <IoLogoDiscord className="h-5 w-5" />
             <span>Discord</span>
-          </Link>
-          <Link
+          </a>
+          <a
             href="https://chat.whatsapp.com/BcapIUdCapFLBsHgdXVfcQ"
             className={`${buttonVariants({ variant: "ghost" })} w-full justify-start gap-3`}
+            target="_blank"
           >
             <IoLogoWhatsapp className="h-5 w-5" />
             <span>WhatsApp</span>
-          </Link>
-          <Link
+          </a>
+          <a
             href="https://www.linkedin.com/company/loslc"
             className={`${buttonVariants({ variant: "ghost" })} w-full justify-start gap-3`}
+            target="_blank"
           >
             <IoLogoLinkedin className="h-5 w-5" />
             <span>LinkedIn</span>
-          </Link>
-          <Link
+          </a>
+          <a
             href="https://www.facebook.com/profile.php?id=61574527415562"
             className={`${buttonVariants({ variant: "ghost" })} w-full justify-start gap-3`}
+            target="_blank"
           >
             <IoLogoFacebook className="h-5 w-5" />
             <span>Facebook</span>
-          </Link>
+          </a>
         </div>
       </PopoverContent>
     </Popover>
