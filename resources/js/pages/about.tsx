@@ -52,20 +52,20 @@ export default function Home() {
       bio: languageProvider.get("about.team.emerick.bio", "Emerick specializes in cybersecurity and is the founder of ETHIX Community. As a CTF player, challenge creator, and freelance junior penetration tester, he is steadily advancing in the field."),
     },
     {
+      firstName: "Kallern",
+      lastName: "ATTER",
+      email: "hackustheinforman@gmail.com",
+      title: languageProvider.get("about.team.kallern.title", "Project Security Tester"),
+      image: `${STAFF}/kall.jpg`,
+      bio: languageProvider.get("about.team.kallern.bio", "Kallern is a cybersecurity enthusiast passionate about ethical hacking and digital security. He continuously sharpens his skills to protect systems from emerging threats."),
+    },
+    {
       firstName: "Bayédzè",
       lastName: "COMLAN",
       email: "bayedzenetworking@gmail.com",
       title: languageProvider.get("about.team.bayedze.title", "Community Manager"),
       image: `${STAFF}/bay.png`,
       bio: languageProvider.get("about.team.bayedze.bio", "Bayédzè is a system administrator with a strong focus on network security and infrastructure management. He enjoys optimizing systems and ensuring reliable performance."),
-    },
-    {
-      firstName: "Kallern",
-      lastName: "ATTER",
-      email: "hackusman@gmail.com",
-      title: languageProvider.get("about.team.kallern.title", "Project Security Tester"),
-      image: `${STAFF}/kall.png`,
-      bio: languageProvider.get("about.team.kallern.bio", "Kallern is a cybersecurity enthusiast passionate about ethical hacking and digital security. He continuously sharpens his skills to protect systems from emerging threats."),
     },
   ];
 
