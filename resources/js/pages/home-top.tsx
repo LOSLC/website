@@ -1,7 +1,10 @@
 import JoinButton from "@/components/home/join-button";
 import HomeTitle from "@/components/home/title";
+import { useLanguage } from "@/components/providers/language-provider";
 
 export default function HomeHeader() {
+  const languageProvider = useLanguage();
+
   return (
     <div className=" blur-none flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12 xl:gap-24 px-4 sm:px-6 md:px-8 lg:px-12 z-20">
       <div className="flex flex-col gap-6 md:gap-8 mt-6 md:mt-10 w-full lg:max-w-[60%] xl:max-w-[50%]">
@@ -11,9 +14,7 @@ export default function HomeHeader() {
 
         <div className="flex justify-start">
           <span className="font-medium text-lg sm:text-xl md:text-2xl max-w-[90%] sm:max-w-[80%] md:max-w-[75%] lg:max-w-[600px]">
-            <span className="font-black">LOSLC</span> is a tech community for
-            open-source enthusiasts and Linux lovers. Where we build and share
-            innovative ideas.
+            <span className="font-black">LOSLC </span> {languageProvider.get("home.subtitle")}
           </span>
         </div>
 

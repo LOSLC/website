@@ -9,6 +9,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import AuthLayout from "@/layouts/auth-layout";
+import { useLanguage } from "@/components/providers/language-provider";
 
 type LoginForm = {
   email: string;
@@ -29,6 +30,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
     password: "",
     remember: false,
   });
+  const languageProvider = useLanguage();
 
   const submit: FormEventHandler = (e) => {
     e.preventDefault();
@@ -39,15 +41,17 @@ export default function Login({ status, canResetPassword }: LoginProps) {
 
   return (
     <AuthLayout
-      title="Log in to your account"
-      description="Enter your email and password below to log in"
+      title={languageProvider.get("page.auth.login.subtitle")}
+      description={languageProvider.get("page.auth.login.description")}
     >
-      <Head title="Log in" />
+      <Head title={languageProvider.get("page.auth.login.title")} />
 
       <form className="flex flex-col gap-6" onSubmit={submit}>
         <div className="grid gap-6">
           <div className="grid gap-2">
-            <Label htmlFor="email">Email address</Label>
+            <Label htmlFor="email">
+              {languageProvider.get("page.auth.login.form.email")}
+            </Label>
             <Input
               id="email"
               type="email"
@@ -64,14 +68,16 @@ export default function Login({ status, canResetPassword }: LoginProps) {
 
           <div className="grid gap-2">
             <div className="flex items-center">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">
+                {languageProvider.get("page.auth.login.form.password")}
+              </Label>
               {canResetPassword && (
                 <TextLink
                   href={route("password.request")}
                   className="ml-auto text-sm"
                   tabIndex={5}
                 >
-                  Forgot password?
+                  {languageProvider.get("page.auth.login.form.password.forgot")}
                 </TextLink>
               )}
             </div>
@@ -83,7 +89,9 @@ export default function Login({ status, canResetPassword }: LoginProps) {
               autoComplete="current-password"
               value={data.password}
               onChange={(e) => setData("password", e.target.value)}
-              placeholder="Password"
+              placeholder={languageProvider.get(
+                "page.auth.login.form.password",
+              )}
             />
             <InputError message={errors.password} />
           </div>
@@ -96,7 +104,9 @@ export default function Login({ status, canResetPassword }: LoginProps) {
               onClick={() => setData("remember", !data.remember)}
               tabIndex={3}
             />
-            <Label htmlFor="remember">Remember me</Label>
+            <Label htmlFor="remember">
+              {languageProvider.get("page.auth.login.form.remember")}
+            </Label>
           </div>
 
           <Button
@@ -106,14 +116,14 @@ export default function Login({ status, canResetPassword }: LoginProps) {
             disabled={processing}
           >
             {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
-            Log in
+            {languageProvider.get("action.login")}
           </Button>
         </div>
 
         <div className="text-muted-foreground text-center text-sm">
-          Don't have an account?{" "}
+          {languageProvider.get("page.auth.login.question.register")}{" "}
           <TextLink href={route("register")} tabIndex={5}>
-            Sign up
+            {languageProvider.get("action.register")}
           </TextLink>
         </div>
       </form>

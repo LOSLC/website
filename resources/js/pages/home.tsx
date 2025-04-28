@@ -12,7 +12,6 @@ export default function Home() {
       <div className="bg-background h-screen w-full flex-col scroll-smooth relative">
         <Spotlight />
         <HomeHeader />
-        <Hero />
         <LandingBody />
       </div>
     </Layout>

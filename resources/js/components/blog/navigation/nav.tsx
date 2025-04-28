@@ -13,29 +13,31 @@ import {
   ShoppingCart,
   Info,
 } from "lucide-react";
+import { useLanguage } from "@/components/providers/language-provider";
 
 export default function Navbar() {
   const { auth } = usePage<SharedData>().props;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const languageProvider = useLanguage();
 
   const mobileLinks: NavLink[] = [
     {
-      name: "Home",
+      name: languageProvider.get("nav.home"),
       href: "/",
       icon: <Home className="h-5 w-5" />,
     },
     {
-      name: "Blog",
+      name: languageProvider.get("nav.blog"),
       href: "/blog",
       icon: <PenSquare className="h-5 w-5" />,
     },
     {
-      name: "Store",
+      name: languageProvider.get("nav.store"),
       href: "/store",
       icon: <ShoppingCart className="h-5 w-5" />,
     },
     {
-      name: "About",
+      name: languageProvider.get("nav.about"),
       href: "/about",
       icon: <Info className="h-5 w-5" />,
     },
@@ -43,19 +45,19 @@ export default function Navbar() {
 
   const navLinks: NavLink[] = [
     {
-      name: "Home",
+      name: languageProvider.get("nav.home"),
       href: "/",
     },
     {
-      name: "Blog",
+      name: languageProvider.get("nav.blog"),
       href: "/blog",
     },
     {
-      name: "Store",
+      name: languageProvider.get("nav.store"),
       href: "/store",
     },
     {
-      name: "About",
+      name: languageProvider.get("nav.about"),
       href: "/about",
     },
   ];
@@ -108,7 +110,7 @@ export default function Navbar() {
               href="/login"
               className={`uppercase ${buttonVariants({ variant: "default", size: "sm" })}`}
             >
-              <span className="hidden sm:inline">Login</span>
+              <span className="hidden sm:inline">{languageProvider.get("action.login")}</span>
               <User2 className="h-5 w-5 sm:hidden" />
             </Link>
           )}
@@ -134,13 +136,13 @@ export default function Navbar() {
                 <li className="mt-4 border-t pt-4">
                   <div className="flex items-center justify-between">
                     <ThemeSwitch />
-                    <span>Toggle Theme</span>
+                    <span>{languageProvider.get("action.theme.toggle")}</span>
                   </div>
                 </li>
               </ul>
             </div>
             <div
-              className="h-full"
+              className="h-full backdrop-blur-2xl bg-background/50 z-50"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             />
           </div>
