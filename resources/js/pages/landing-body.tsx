@@ -1,5 +1,6 @@
 import HeroCard from "@/components/home/hero-card";
 import JoinButton from "@/components/home/join-button";
+import { useLanguage } from "@/components/providers/language-provider";
 import { useScrollScale } from "@/hooks/use-scrollscale";
 import { Link } from "@inertiajs/react";
 import { motion } from "framer-motion";
@@ -7,39 +8,34 @@ import { Terminal, Users, Code, BookOpen, Calendar } from "lucide-react";
 
 export default function LandingBody() {
   const scale = useScrollScale({ scaleRange: [0.5, 1], scrollRange: [0, 0.5] });
+  const languageProvider = useLanguage();
 
   const missionText = (
     <div className="space-y-4">
-      <p>
-        We're a collective passionate about digital freedom, collaborative
-        learning, and open-source empowerment.
-      </p>
-      <p>
-        Through Linux and open-source tools, we're building a community where
-        knowledge flows freely and everyone can grow.
-      </p>
-      <p>
-        Whether you're debugging your first script or contributing to kernels,
-        you'll find allies here.
-      </p>
+      {languageProvider
+        .get("landing.mission")
+        .split("\n")
+        .map((paragraph) => {
+          return <p key={paragraph}>{paragraph}</p>;
+        })}
     </div>
   );
 
   const activities = [
     {
       icon: <Code />,
-      title: "Collaborative Coding",
-      text: "Weekly hackathons and pair programming sessions",
+      title: languageProvider.get("landing.why_join.res1.title"),
+      text: languageProvider.get("landing.why_join.res1"),
     },
     {
       icon: <BookOpen />,
-      title: "Workshops & Learning",
-      text: "From bash basics to open-source contributions",
+      title: languageProvider.get("landing.why_join.res2.title"),
+      text: languageProvider.get("landing.why_join.res2"),
     },
     {
       icon: <Users />,
-      title: "Community Support",
-      text: "24/7 Discord channel with 100+ members",
+      title: languageProvider.get("landing.why_join.res3.title"),
+      text: languageProvider.get("landing.why_join.res3"),
     },
   ];
 
@@ -56,7 +52,7 @@ export default function LandingBody() {
             animate={{ opacity: 1 }}
             className="max-w-4xl px-4 text-3xl font-bold text-center md:text-5xl bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent"
           >
-            “Building tomorrow's open-source, one contributor at a time”
+            “{languageProvider.get("landing.hero.message")}”
           </motion.span>
 
           <div className="w-full">
@@ -76,15 +72,12 @@ export default function LandingBody() {
                 content={
                   <div className="space-y-4">
                     <h3 className="text-xl font-bold">IY2L</h3>
-                    <p>
-                      Join us every Thursday at 8 PM UTC for Inside Your Linux
-                      Lab (IY2L) where we dive deep into your Linux world.
-                    </p>
+                    <p>{languageProvider.get("landing.event.iy2l")}</p>
                     <Link
                       href={"https://discord.gg/B3hPHmvddP"}
                       className="px-6 py-2 font-medium transition-all rounded-lg bg-gradient-to-r from-green-400 to-blue-500 hover:scale-105"
                     >
-                      RSVP Now
+                      {languageProvider.get("landing.event.rsvp")}
                     </Link>
                   </div>
                 }
@@ -101,7 +94,7 @@ export default function LandingBody() {
           whileInView={{ opacity: 1, y: 0 }}
           className="mb-16 text-4xl font-bold text-center"
         >
-          Why Join Our Community?
+          {languageProvider.get("landing.why_join")}
         </motion.h2>
 
         <div className="grid gap-8 md:grid-cols-3">
@@ -127,11 +120,10 @@ export default function LandingBody() {
         className="px-4 py-20 text-center cursor-default"
       >
         <h2 className="mb-8 text-3xl font-bold md:text-4xl">
-          Ready to Dive In?
+          {languageProvider.get("landing.footer.question")}
         </h2>
         <p className="max-w-2xl mx-auto mb-12 text-xl text-neutral-400">
-          Join 250+ developers in our open-source journey. All skill levels
-          welcome!
+          {languageProvider.get("landing.footer.desc")}
         </p>
         <JoinButton />
       </motion.div>
