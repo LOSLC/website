@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/sidebar";
 import { type NavItem } from "@/types";
 import { Link } from "@inertiajs/react";
-import { Home } from "lucide-react";
+import { Home, LayoutGrid } from "lucide-react";
 import AppLogo from "./app-logo";
 import { useLanguage } from "./providers/language-provider";
 
@@ -24,9 +24,15 @@ export function AppSidebar() {
       href: "/",
       icon: Home,
     },
+    {
+      title: languageProvider.get("nav.blog"),
+      href: "/blog",
+      icon: LayoutGrid,
+    },
   ];
 
   const footerNavItems: NavItem[] = [];
+
   return (
     <Sidebar collapsible="icon" variant="inset">
       <SidebarHeader>

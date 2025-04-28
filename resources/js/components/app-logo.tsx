@@ -2,6 +2,7 @@ import AppLogoIcon from "./app-logo-icon";
 import { useLanguage } from "./providers/language-provider";
 
 export default function AppLogo() {
+
   const languageProvider = useLanguage();
   return (
     <>
