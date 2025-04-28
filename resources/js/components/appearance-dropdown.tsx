@@ -1,11 +1,13 @@
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { useLanguage } from '@/components/providers/language-provider';
 import { useAppearance } from '@/hooks/use-appearance';
 import { Monitor, Moon, Sun } from 'lucide-react';
 import { HTMLAttributes } from 'react';
 
 export default function AppearanceToggleDropdown({ className = '', ...props }: HTMLAttributes<HTMLDivElement>) {
     const { appearance, updateAppearance } = useAppearance();
+    const languageProvider = useLanguage();
 
     const getCurrentIcon = () => {
         switch (appearance) {
@@ -31,19 +33,19 @@ export default function AppearanceToggleDropdown({ className = '', ...props }: H
                     <DropdownMenuItem onClick={() => updateAppearance('light')}>
                         <span className="flex items-center gap-2">
                             <Sun className="h-5 w-5" />
-                            Light
+                            {languageProvider.get("appearance.light")}
                         </span>
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={() => updateAppearance('dark')}>
                         <span className="flex items-center gap-2">
                             <Moon className="h-5 w-5" />
-                            Dark
+                            {languageProvider.get("appearance.dark")}
                         </span>
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={() => updateAppearance('system')}>
                         <span className="flex items-center gap-2">
                             <Monitor className="h-5 w-5" />
-                            System
+                            {languageProvider.get("appearance.system")}
                         </span>
                     </DropdownMenuItem>
                 </DropdownMenuContent>

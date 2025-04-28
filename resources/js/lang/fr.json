@@ -1,0 +1,143 @@
+{
+  "hello_world": "bonjour monde",
+  
+  "nav.home": "Accueil",
+  "nav.about": "À propos",
+  "nav.blog": "Blog",
+  "nav.dashboard": "Tableau de bord",
+  "nav.profile": "Profil",
+  "nav.settings": "Paramètres",
+  "nav.appearance": "Apparence",
+  "nav.password": "Mot de passe",
+  "nav.store": "Boutique",
+  "nav.logout": "Déconnexion",
+
+  "action.cancel": "Annuler",
+  "action.login": "Se connecter",
+  "action.register": "S'inscrire",
+  "action.save": "Enregistrer les modifications",
+  "action.theme.toggle": "Changer de thème",
+
+  "appearance.dark": "Sombre",
+  "appearance.light": "Clair",
+  "appearance.system": "Système",
+
+  "common.select.language": "Choisir la langue",
+
+  "system.language.choose.title": "Choisissez votre langue",
+  "system.language.choose.btn": "Choisir",
+
+  "field.password": "Mot de passe",
+
+  "page.auth.login.title": "Connexion",
+  "page.auth.login.subtitle": "Connectez-vous à votre compte.",
+  "page.auth.login.description": "Entrez votre adresse e-mail et votre mot de passe ci-dessous pour vous connecter.",
+  "page.auth.login.form.email": "Email",
+  "page.auth.login.form.password": "Mot de passe",
+  "page.auth.login.form.password.forgot": "Mot de passe oublié ?",
+  "page.auth.login.form.remember": "Se souvenir de moi",
+  "page.auth.login.question.register": "Vous n'avez pas encore de compte ?",
+
+  "page.auth.register.title": "Créer un compte",
+  "page.auth.register.subtitle": "Créer un compte",
+  "page.auth.register.description": "Remplissez le formulaire ci-dessous pour créer votre compte.",
+  "page.auth.register.form.name": "Nom",
+  "page.auth.register.form.name.placeholder": "Nom complet",
+  "page.auth.register.form.email": "Email",
+  "page.auth.register.form.password": "Mot de passe",
+  "page.auth.register.form.password_confirm": "Confirmez le mot de passe",
+  "page.auth.register.question.login": "Vous avez déjà un compte ?",
+
+  "settings.title": "Paramètres utilisateur",
+  "settings.subtitle": "Paramètres utilisateur",
+  "settings.appearance.title": "Paramètres d'apparence",
+  "settings.appearance.desc": "Mettez à jour les paramètres d'apparence de votre compte",
+  "settings.password.title": "Paramètres du mot de passe",
+  "settings.password.desc": "Mettez à jour le mot de passe de votre compte",
+  "settings.password.form.title": "Paramètres du mot de passe",
+  "settings.password.form.description": "Mettez à jour votre mot de passe",
+  "settings.password.form.password_current": "Mot de passe actuel",
+  "settings.password.form.password_new": "Nouveau mot de passe",
+  "settings.password.form.password_confirm": "Confirmez le mot de passe",
+  "settings.profile.title": "Paramètres du profil",
+  "settings.profile.desc": "Mettez à jour vos informations personnelles",
+  "settings.profile.form.title": "Mettre à jour les informations du profil",
+  "settings.profile.form.description": "Mettez à jour votre nom et votre adresse e-mail",
+  "settings.profile.form.name": "Nom",
+  "settings.profile.form.name.placeholder": "Nom complet",
+  "settings.profile.form.email": "Email",
+  "settings.profile.delete.title": "Supprimer le compte",
+  "settings.profile.delete.description": "Supprimez votre compte et toutes ses ressources",
+  "settings.profile.delete.btn": "Supprimer le compte",
+  "settings.profile.delete.warning.title": "Avertissement",
+  "settings.profile.delete.warning.description": "Veuillez procéder avec précaution, cette action est irréversible.",
+  "settings.profile.delete.confirm.title": "Confirmer la suppression du compte",
+  "settings.profile.delete.confirm.description": "Une fois votre compte supprimé, toutes ses ressources et données seront également supprimées définitivement. Veuillez entrer votre mot de passe pour confirmer.",
+
+  "footer.copyright": "© 2025 LOSLC. Tous droits réservés.",
+
+  "home.title": "LOSLC, Communauté des Amateurs de Linux et d'Open Source.",
+  "home.subtitle": "LOSLC est une communauté tech pour les passionnés d'open source et les amateurs de Linux. Un endroit où nous construisons et partageons des idées innovantes.",
+  "home.join.btn": "Rejoignez-nous",
+
+  "about.title": "Une communauté pour les passionnés d'open-source et les amateurs de Linux.",
+  "about.subtitle": "Nous construisons une communauté de développeurs passionnés et d'amateurs de Linux.",
+  "about.mission.title": "Construire l'Open-Source en tant que communauté",
+  "about.mission.desc": "L'open-source s'épanouit grâce à la collaboration et à la propriété partagée. Les contributeurs créent des solutions innovantes qui profitent à tous, alimentant un mouvement qui transforme la technologie.",
+  "about.collaborative.title": "Grandir ensemble",
+  "about.collaborative.desc": "La croissance est plus forte lorsqu'elle est partagée. Grâce au mentorat et à la collaboration, nous accélérons les progrès et créons un environnement où chacun peut s'épanouir ensemble.",
+  "about.teach.title": "Enseignez aux autres en partageant vos connaissances",
+  "about.teach.desc": "Le partage des connaissances permet aux autres de s'autonomiser, favorise l'innovation et repousse les limites. Il s'agit d'avoir un impact significatif au-delà de l'apprentissage individuel.",
+  "about.thrive.title": "S'épanouir ensemble, pas seulement survivre",
+  "about.thrive.desc": "Dans une communauté forte, personne ne lutte seul. Nous nous soutenons mutuellement, partageons nos connaissances et grandissons collectivement. Le progrès est plus rapide et plus enrichissant lorsque nous construisons ensemble.",
+  "about.join.title": "Rejoignez notre communauté et commencez à collaborer dès aujourd'hui.",
+  "about.team.title": "Notre équipe",
+  "about.team.desc": "Passionnée, compétente et collaborative, notre équipe donne vie aux idées et fait avancer l'innovation.",
+  
+  "about.team.daniel.title": "Fondateur",
+  "about.team.daniel.bio": "Daniel est passionné par la science et la technologie. Il a commencé à programmer au collège et développe depuis de nombreux projets pour affiner ses compétences.",
+  
+  "about.team.bayedze.title": "Responsable Communautaire",
+  "about.team.bayedze.bio": "Bayédzè est administrateur système spécialisé en sécurité réseau et gestion d'infrastructure. Il aime optimiser les systèmes et garantir leur fiabilité.",
+  
+  "about.team.denise.title": "Secrétaire",
+  "about.team.denise.bio": "Denise est développeuse web full-stack, créant des applications web dynamiques, réactives et performantes. Elle aime résoudre des problèmes et explorer de nouvelles technologies pour améliorer l'expérience utilisateur.",
+  
+  "about.team.emerick.title": "Responsable Communautaire",
+  "about.team.emerick.bio": "Emerick est spécialiste en cybersécurité et fondateur de la communauté ETHIX. Joueur de CTF, créateur de challenges et pentester freelance junior, il progresse activement dans le domaine.",
+  
+  "about.team.kallern.title": "Pentester",
+  "about.team.kallern.bio": "Kallern est un passionné de cybersécurité spécialisé dans le hacking éthique et la protection des systèmes contre les nouvelles menaces.",
+  
+  "about.team.laureen.title": "Responsable des relations communautaires",
+  "about.team.laureen.bio": "Laureen est passionnée par l'open-source et la robotique. Elle contribue à des projets innovants et aime collaborer avec la communauté tech pour rester à la pointe des nouvelles technologies.",
+  
+  "about.team.rayane.title": "Responsable communication",
+  "about.team.rayane.bio": "Rayane est développeur web full-stack, créant des applications modernes et évolutives. Il est toujours avide d'apprendre de nouvelles technologies pour enrichir l'expérience utilisateur.",
+
+  "landing.hero.description": "LOSLC est une communauté tech pour les passionnés d'open source et les amateurs de Linux. Un endroit où nous construisons et partageons des idées innovantes.",
+  "landing.hero.message": "Construire l'open source de demain, un contributeur à la fois.",
+  "landing.join_us.btn": "Rejoignez-nous",
+  "landing.mission": "Nous sommes un collectif passionné par la liberté numérique, l'apprentissage collaboratif et la valorisation de l'open source.\n\nGrâce à Linux et aux outils open source, nous construisons une communauté où le savoir circule librement et où chacun peut grandir.\n\nQue vous déboguiez votre premier script ou que vous contribuiez à des noyaux, vous trouverez ici des alliés.",
+  
+  "landing.event.iy2l": "Rejoignez-nous chaque jeudi à 20h UTC pour Inside Your Linux Lab (IY2L), où nous explorons en profondeur votre univers Linux.",
+  "landing.event.rsvp": "Inscrivez-vous maintenant",
+
+  "landing.why_join": "Pourquoi rejoindre notre communauté ?",
+  "landing.why_join.res1.title": "Codage en équipe",
+  "landing.why_join.res1": "Hackathons hebdomadaires et sessions de programmation en binôme",
+  "landing.why_join.res2.title": "Ateliers et apprentissage",
+  "landing.why_join.res2": "Des bases de bash aux contributions open-source",
+  "landing.why_join.res3.title": "Support communautaire",
+  "landing.why_join.res3": "Canal Discord actif 24/7 avec plus de 100 membres",
+
+  "landing.footer.question": "Prêt à faire le grand saut ?",
+  "landing.footer.desc": "Rejoignez plus de 250 développeurs dans notre aventure open-source. Tous les niveaux de compétence sont les bienvenus !",
+
+  "blog.title": "Blog de LOSLC",
+  "blog.readmore": "Lire plus",
+  "blog.post.comments": "Commentaire",
+  "blog.post.comments_plural": "Commentaires",
+  "blog.post.comments.replies": "Réponses",
+  "blog.post.published_by": "Publié par"
+}
