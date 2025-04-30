@@ -3,6 +3,7 @@ import StaffMember, { StaffProfile } from "@/components/people/staff-member";
 import { Separator } from "@/components/ui/separator";
 import { useLanguage } from "@/components/providers/language-provider";
 import { IoLogoDiscord, IoLogoGithub, IoLogoWhatsapp } from "react-icons/io5";
+import { Head } from '@inertiajs/react';
 
 const STAFF = "/assets/img/staff";
 
@@ -70,6 +71,7 @@ export default function Home() {
 
   return (
     <Layout>
+      <Head title="About" />
       <div className="relative h-screen w-full flex-col scroll-smooth">
         <div className="bg-background/50 z-20 flex min-h-[60vh] w-full justify-center backdrop-blur-2xl md:h-screen md:items-center">
           <div className="flex w-10/12 items-center justify-center py-16 sm:w-8/12 md:py-0">
