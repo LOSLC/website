@@ -2,8 +2,8 @@ import Layout from "@/components/blog/layout";
 import StaffMember, { StaffProfile } from "@/components/people/staff-member";
 import { Separator } from "@/components/ui/separator";
 import { useLanguage } from "@/components/providers/language-provider";
-import { Link } from "@inertiajs/react";
 import { IoLogoDiscord, IoLogoGithub, IoLogoWhatsapp } from "react-icons/io5";
+import { Head } from '@inertiajs/react';
 
 const STAFF = "/assets/img/staff";
 
@@ -71,6 +71,7 @@ export default function Home() {
 
   return (
     <Layout>
+      <Head title="About" />
       <div className="relative h-screen w-full flex-col scroll-smooth">
         <div className="bg-background/50 z-20 flex min-h-[60vh] w-full justify-center backdrop-blur-2xl md:h-screen md:items-center">
           <div className="flex w-10/12 items-center justify-center py-16 sm:w-8/12 md:py-0">
@@ -147,7 +148,7 @@ export default function Home() {
             {languageProvider.get("about.join.title")}
           </span>
           <div className="flex items-center justify-center gap-8 py-6 sm:gap-12 md:gap-20 md:py-10">
-            <Link
+            <a
               href="https://chat.whatsapp.com/BcapIUdCapFLBsHgdXVfcQ"
               className="transition-transform hover:scale-110"
             >
@@ -155,8 +156,8 @@ export default function Home() {
                 className="h-10 w-10 md:h-[50px] md:w-[50px]"
                 color="#25D366"
               />
-            </Link>
-            <Link
+            </a>
+            <a
               href="https://discord.gg/eu7WKAnv"
               className="transition-transform hover:scale-110"
             >
@@ -164,13 +165,13 @@ export default function Home() {
                 className="h-10 w-10 md:h-[50px] md:w-[50px]"
                 color="#5865F2"
               />
-            </Link>
-            <Link
+            </a>
+            <a
               href="https://github.com/LOSLC"
               className="transition-transform hover:scale-110"
             >
               <IoLogoGithub className="h-10 w-10 md:h-[50px] md:w-[50px]" />
-            </Link>
+            </a>
           </div>
         </div>
         {/* Footer */}
