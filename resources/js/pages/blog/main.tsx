@@ -4,19 +4,23 @@ import PostsContainer from "@/components/blog/post/post-container";
 import { useLanguage } from "@/components/providers/language-provider";
 import { Props } from "@/types/post";
 import { Head } from "@inertiajs/react";
+import Footer from "../footer";
 
 export default function BlogPage(props: Props) {
   const languageProvider = useLanguage();
   return (
     <Layout>
-      <Head title="Blog" />
-      <div className="flex flex-col">
-        <h1 className="mb-6 text-center text-xl font-bold sm:text-2xl md:text-3xl uppercase">
-          {languageProvider.get("blog.title")}
-        </h1>
-        <PostsContainer posts={props.posts} />
+      <div className="min-h-screen">
+        <Head title="Blog" />
+        <div className="flex flex-col">
+          <h1 className="mb-6 text-center text-xl font-bold sm:text-2xl md:text-3xl uppercase">
+            {languageProvider.get("blog.title")}
+          </h1>
+          <PostsContainer posts={props.posts} />
+        </div>
+        <Paginator pagination={props.pagination} />
       </div>
-      <Paginator pagination={props.pagination} />
+        <Footer />
     </Layout>
   );
 }

@@ -1,6 +1,7 @@
 import HeroCard from "@/components/home/hero-card";
 import JoinButton from "@/components/home/join-button";
 import { useLanguage } from "@/components/providers/language-provider";
+import { buttonVariants } from "@/components/ui/button";
 import { useScrollScale } from "@/hooks/use-scrollscale";
 import { Link } from "@inertiajs/react";
 import { motion } from "framer-motion";
@@ -70,15 +71,20 @@ export default function LandingBody() {
                 title="Next Event"
                 icon={<Calendar className="text-blue-400" />}
                 content={
-                  <div className="space-y-4">
-                    <h3 className="text-xl font-bold">IY2L</h3>
-                    <p>{languageProvider.get("landing.event.iy2l")}</p>
-                    <Link
-                      href={"https://discord.gg/B3hPHmvddP"}
-                      className="px-6 py-2 font-medium transition-all rounded-lg bg-gradient-to-r from-green-400 to-blue-500 hover:scale-105"
-                    >
-                      {languageProvider.get("landing.event.rsvp")}
-                    </Link>
+                  <div className="space-y-4 h-full flex justify-around flex-col">
+                    <div>
+                      <h3 className="text-xl font-bold">IY2L</h3>
+                      <p>{languageProvider.get("landing.event.iy2l")}</p>
+                    </div>
+                    <div className="flex items-center justify-start mb-6">
+                      <a
+                        href={"https://discord.gg/B3hPHmvddP"}
+                        className={`${buttonVariants({ variant: "default" })}`}
+                        target="_blank"
+                      >
+                        {languageProvider.get("landing.event.rsvp")}
+                      </a>
+                    </div>
                   </div>
                 }
               />
@@ -113,7 +119,6 @@ export default function LandingBody() {
           ))}
         </div>
       </section>
-
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}

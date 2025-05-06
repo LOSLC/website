@@ -17,6 +17,7 @@ import {
   SelectValue,
 } from "../ui/select";
 import { Button } from "../ui/button";
+import Footer from "@/pages/footer";
 
 type Props = { children: React.ReactNode; breadcrumbs?: BreadcrumbItemType[] };
 
@@ -73,7 +74,9 @@ export default function Layout({ children, breadcrumbs = [] }: Props) {
       <main className="flex min-h-screen w-full justify-center pb-6">
         <div className="container">
           <Breadcrumbs breadcrumbs={breadcrumbs} />
-          <div className="mt-4 p-4">{children}</div>
+          <div className="mt-4 p-4 relative">
+            {children}
+          </div>
         </div>
       </main>
     </>

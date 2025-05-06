@@ -4,6 +4,7 @@ import { Head } from "@inertiajs/react";
 import HomeHeader from "./home-top";
 import LandingBody from "./landing-body";
 import Spotlight from "@/components/effects/spotlight";
+import Footer from "./footer";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
         <Spotlight />
         <HomeHeader />
         <LandingBody />
+        <Footer />
       </div>
     </Layout>
   );

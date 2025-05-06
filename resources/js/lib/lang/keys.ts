@@ -146,6 +146,7 @@ export type LanguageKey =
   // System
   | "system.language.choose.btn"
   | "system.language.choose.title"
+  | "system.language.selected"
 
   // Hello World (Misc)
   | "hello_world";
