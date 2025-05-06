@@ -133,5 +133,6 @@
   "settings.subtitle": "User settings",
   "settings.title": "User settings",
   "system.language.choose.btn": "Choose",
-  "system.language.choose.title": "Choose your language"
+  "system.language.choose.title": "Choose your language",
+  "system.language.selected": "Selected language"
 }

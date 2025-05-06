@@ -18,7 +18,7 @@ export default function HeroCard({
           <span>{title}</span>
         </div>
       </div>
-      <code className="text-lg p-2 bg-card">{content}</code>
+      <code className="text-lg p-2 bg-card h-full">{content}</code>
     </div>
   );
 }
