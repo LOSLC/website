@@ -1,3 +1,4 @@
+import { useLanguage } from "../providers/language-provider";
 import { Button, buttonVariants } from "../ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import {
@@ -8,11 +9,12 @@ import {
 } from "react-icons/io5";
 
 export default function JoinButton() {
+  const languageProvider = useLanguage()
   return (
     <Popover>
       <PopoverTrigger asChild>
         <Button className="cursor-pointer text-sm md:text-base px-6 py-4 md:px-8 md:py-5">
-          Join Us
+          {languageProvider.get("landing.join_us.btn", "Join Us")}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[150px] my-3 p-2">
