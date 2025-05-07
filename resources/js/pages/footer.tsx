@@ -1,14 +1,12 @@
-import LangSelect from "@/components/language/lang-select";
+import LangSelect from '@/components/language/lang-select';
 
 export default function Footer() {
-  return (
-    <footer className="flex bottom-0 min-h-[150px] items-center justify-center gap-10">
-      <div className="info flex flex-col justify-center text-foreground/60">
-        Copyright LOSLC © {new Date().getFullYear()}
-      </div>
-      <div className="controls flex flex-col justify-center">
-        <LangSelect />
-      </div>
-    </footer>
-  );
+    return (
+        <footer className="bottom-0 flex min-h-[150px] items-center justify-center gap-10">
+            <div className="info text-foreground/60 flex flex-col justify-center">Copyright LOSLC &copy; {new Date().getFullYear()}</div>
+            <div className="controls flex flex-col justify-center">
+                <LangSelect />
+            </div>
+        </footer>
+    );
 }
