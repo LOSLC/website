@@ -8,20 +8,25 @@ use Illuminate\Auth\Access\Response;
 
 class ProductPolicy
 {
+    private function isAdmin(User $user): bool
+    {
+        return $user->role === 'admin';
+    }
+
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Product $product): bool
+    public function view(User $user, User $model): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -29,38 +34,38 @@ class ProductPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $this->isAdmin($user);
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Product $product): bool
+    public function update(User $user, Product $model): bool
     {
-        return false;
+        return $this->isAdmin($user);
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Product $product): bool
+    public function delete(User $user, Product $model): bool
     {
-        return false;
+        return $this->isAdmin($user);
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Product $product): bool
+    public function restore(User $user, Product $model): bool
     {
-        return false;
+        return $this->isAdmin($user);
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Product $product): bool
+    public function forceDelete(User $user, Product $model): bool
     {
-        return false;
+        return $this->isAdmin($user);
     }
 }

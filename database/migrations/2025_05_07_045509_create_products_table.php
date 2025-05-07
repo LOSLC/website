@@ -13,9 +13,8 @@ return new class extends Migration {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->integer('price');
-            $table->string('image');
             $table->integer('stock')->nullable();
             $table->foreignId('author_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
