@@ -1,21 +1,21 @@
-import { truncateText } from "@/lib/utils";
-import { Post } from "@/types/post";
-import { Link } from "@inertiajs/react";
-import { ChevronRight, Heart, MessageSquare } from "lucide-react";
+import { truncateText } from '@/lib/utils';
+import { Post } from '@/types/post';
+import { Link } from '@inertiajs/react';
+import { ChevronRight, Heart, MessageSquare } from 'lucide-react';
 
-export default function PostComponent({ post }: { post: Post }) {
+type Props = { post: Post };
+
+export default function PostComponent({ post }: Props) {
   return (
     <article className="motion-preset-blur-down bg-card mb-4 flex max-w-[1000px] items-center justify-center rounded-xl border p-4 shadow">
       <Link
-        href={route("blog.show", { slug: post.slug, post: post.id })}
+        href={route('blog.show', { slug: post.slug, post: post.id })}
         className="flex w-full cursor-default flex-col items-start justify-between gap-4 md:flex-row"
       >
         <div className="w-full md:w-1/2">
           <img
             className="h-64 w-full cursor-pointer rounded-lg object-cover"
-            src={
-              post.image ? `/storage/${post.image}` : "/assets/img/cover.png"
-            }
+            src={post.image ? `/storage/${post.image}` : '/assets/img/cover.png'}
             alt={post.title}
           />
         </div>
@@ -38,27 +38,17 @@ export default function PostComponent({ post }: { post: Post }) {
               </div>
             </div>
             <div className="flex flex-col gap-4">
-              <h3
-                className="cursor-pointer text-2xl font-semibold"
-                title={post.title}
-              >
+              <h3 className="cursor-pointer text-2xl font-semibold" title={post.title}>
                 {truncateText(post.title, 50)}
               </h3>
-              <p
-                className="text-muted-foreground mb-2 text-sm"
-                title={post.description}
-              >
+              <p className="text-muted-foreground mb-2 text-sm" title={post.description}>
                 {truncateText(post.description)}
               </p>
             </div>
           </div>
           <div className="my-2 flex items-start gap-4">
             <img
-              src={
-                post.author.avatar_url
-                  ? `/storage/${post.author.avatar_url}`
-                  : "/assets/img/user-profile.png"
-              }
+              src={post.author.avatar_url ? `/storage/${post.author.avatar_url}` : '/assets/img/user-profile.png'}
               alt={post.author.name}
               className="h-12 w-12 rounded-full"
             />
