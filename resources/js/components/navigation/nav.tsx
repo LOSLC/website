@@ -1,19 +1,11 @@
-import { useState } from "react";
-import { buttonVariants } from "@/components/ui/button";
-import ThemeSwitch from "@/components/ui/theming/theme-switch";
-import { Link, usePage } from "@inertiajs/react";
-import { Link as NavLink } from "./link";
-import { SharedData } from "@/types";
-import {
-  User2,
-  Menu,
-  X,
-  Home,
-  PenSquare,
-  ShoppingCart,
-  Info,
-} from "lucide-react";
-import { useLanguage } from "@/components/providers/language-provider";
+import { useLanguage } from '@/components/providers/language-provider';
+import { buttonVariants } from '@/components/ui/button';
+import ThemeSwitch from '@/components/ui/theming/theme-switch';
+import { SharedData } from '@/types';
+import { Link, usePage } from '@inertiajs/react';
+import { Home, Info, Menu, PenSquare, ShoppingCart, User2, X } from 'lucide-react';
+import { useState } from 'react';
+import { Link as NavLink } from './link';
 
 export default function Navbar() {
   const { auth } = usePage<SharedData>().props;
@@ -22,65 +14,54 @@ export default function Navbar() {
 
   const mobileLinks: NavLink[] = [
     {
-      name: languageProvider.get("nav.home"),
-      href: "/",
+      name: languageProvider.get('nav.home'),
+      href: '/',
       icon: <Home className="h-5 w-5" />,
     },
     {
-      name: languageProvider.get("nav.blog"),
-      href: "/blog",
+      name: languageProvider.get('nav.blog'),
+      href: '/blog',
       icon: <PenSquare className="h-5 w-5" />,
     },
     {
-      name: languageProvider.get("nav.store"),
-      href: "/store",
-      icon: <ShoppingCart className="h-5 w-5" />,
+      name: languageProvider.get('nav.about'),
+      href: '/about',
+      icon: <Info className="h-5 w-5" />,
     },
     {
-      name: languageProvider.get("nav.about"),
-      href: "/about",
-      icon: <Info className="h-5 w-5" />,
+      name: languageProvider.get('nav.store'),
+      href: '/store',
+      icon: <ShoppingCart className="h-5 w-5" />,
     },
   ];
 
   const navLinks: NavLink[] = [
     {
-      name: languageProvider.get("nav.home"),
-      href: "/",
+      name: languageProvider.get('nav.home'),
+      href: '/',
     },
     {
-      name: languageProvider.get("nav.blog"),
-      href: "/blog",
+      name: languageProvider.get('nav.blog'),
+      href: '/blog',
     },
     {
-      name: languageProvider.get("nav.store"),
-      href: "/store",
+      name: languageProvider.get('nav.about'),
+      href: '/about',
     },
     {
-      name: languageProvider.get("nav.about"),
-      href: "/about",
+      name: languageProvider.get('nav.store'),
+      href: '/store',
     },
   ];
 
   return (
     <header className="bg-background/50 sticky top-0 z-50 mb-4 flex w-full justify-center border-b backdrop-blur-2xl">
       <nav className="container flex items-center justify-between p-4">
-        <button
-          className="sm:hidden"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-label="Toggle navigation menu"
-        >
-          {isMenuOpen ? (
-            <X className="h-6 w-6 motion-preset-compress" />
-          ) : (
-            <Menu className="h-6 w-6 motion-preset-compress" />
-          )}
+        <button className="sm:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle navigation menu">
+          {isMenuOpen ? <X className="motion-preset-compress h-6 w-6" /> : <Menu className="motion-preset-compress h-6 w-6" />}
         </button>
 
-        <Link
-          href="/"
-          className="cursor-default text-2xl font-bold uppercase ml-2 sm:ml-0"
-        >
+        <Link href="/" className="ml-2 cursor-default text-2xl font-bold uppercase sm:ml-0">
           loslc
         </Link>
 
@@ -106,11 +87,8 @@ export default function Navbar() {
               <span className="hidden sm:inline">{auth.user.name}</span>
             </Link>
           ) : (
-            <Link
-              href="/login"
-              className={`uppercase ${buttonVariants({ variant: "default", size: "sm" })}`}
-            >
-              <span className="hidden sm:inline">{languageProvider.get("action.login")}</span>
+            <Link href="/login" className={`uppercase ${buttonVariants({ variant: 'default', size: 'sm' })}`}>
+              <span className="hidden sm:inline">{languageProvider.get('action.login')}</span>
               <User2 className="h-5 w-5 sm:hidden" />
             </Link>
           )}
@@ -118,14 +96,14 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="fixed left-0 top-16 z-50 w-full bg-transparent backdrop-blur-lg sm:hidden h-screen motion-preset-blur-down">
-            <div className="container p-4 bg-background">
+          <div className="motion-preset-blur-down fixed top-16 left-0 z-50 h-screen w-full bg-transparent backdrop-blur-lg sm:hidden">
+            <div className="bg-background container p-4">
               <ul className="flex flex-col gap-4">
                 {mobileLinks.map((link, index) => (
                   <li key={index}>
                     <Link
                       href={link.href}
-                      className="flex items-center gap-4 p-2 text-lg hover:bg-accent rounded-lg"
+                      className="hover:bg-accent flex items-center gap-4 rounded-lg p-2 text-lg"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {link.icon}
@@ -136,15 +114,12 @@ export default function Navbar() {
                 <li className="mt-4 border-t pt-4">
                   <div className="flex items-center justify-between">
                     <ThemeSwitch />
-                    <span>{languageProvider.get("action.theme.toggle")}</span>
+                    <span>{languageProvider.get('action.theme.toggle')}</span>
                   </div>
                 </li>
               </ul>
             </div>
-            <div
-              className="h-full backdrop-blur-2xl bg-background/50 z-50"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            />
+            <div className="bg-background/50 z-50 h-full backdrop-blur-2xl" onClick={() => setIsMenuOpen(!isMenuOpen)} />
           </div>
         )}
       </nav>
