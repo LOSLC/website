@@ -123,5 +123,6 @@
 }
 
 html {
+    font-family: 'Inter', sans-serif;
     @apply scroll-smooth;
 }
