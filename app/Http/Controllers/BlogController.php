@@ -32,7 +32,7 @@ class BlogController extends Controller
             return $post;
         });
 
-        return Inertia::render('blog/main', [
+        return Inertia::render('blog', [
             'posts' => $posts->items(),
             'pagination' => [
                 'current_page' => $posts->currentPage(),
@@ -93,7 +93,7 @@ class BlogController extends Controller
             return $comment;
         });
 
-        return Inertia::render('blog/post/main', [
+        return Inertia::render('post', [
             'post' => $post,
             'tags' => $post->tags,
             'category' => $post->category,

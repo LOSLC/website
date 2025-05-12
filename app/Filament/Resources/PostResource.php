@@ -49,7 +49,7 @@ class PostResource extends Resource
                             'user_id' => auth()->id()
                         ])->id;
                     }),
-                Forms\Components\RichEditor::make('content')
+                Forms\Components\MarkdownEditor::make('content')
                     ->required()
                     ->fileAttachmentsDisk('public')
                     ->fileAttachmentsDirectory('posts')

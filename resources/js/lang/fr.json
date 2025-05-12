@@ -137,8 +137,11 @@
 
     "blog.title": "Blog de LOSLC",
     "blog.readmore": "Lire plus",
+    "blog.posted_on": "Publié le",
+    "blog.no_posts": "Aucun article trouvé",
     "blog.post.comments": "Commentaire",
     "blog.post.comments_plural": "Commentaires",
     "blog.post.comments.replies": "Réponses",
-    "blog.post.published_by": "Publié par"
+    "blog.post.published_by": "Publié par",
+    "coming_soon": "À venir"
 }

@@ -40,6 +40,8 @@
     "blog.post.comments": "Comment",
     "blog.post.comments.replies": "Replies",
     "blog.post.comments_plural": "Comments",
+    "blog.posted_on": "Published on",
+    "blog.no_posts": "No posts yet.",
     "blog.post.published_by": "Published by",
     "blog.readmore": "Read More",
     "blog.title": "LOSLC Blog",
@@ -134,5 +136,6 @@
     "settings.title": "User settings",
     "system.language.choose.btn": "Choose",
     "system.language.choose.title": "Choose your language",
-    "system.language.selected": "Language"
+    "system.language.selected": "Language",
+    "coming_soon": "Coming Soon"
 }
