@@ -37,7 +37,7 @@ const PostContent: React.FC<PostContentProps> = ({ content }) => {
         ul: ({ children }) => <ul className={classMap.ul}>{children}</ul>,
         ol: ({ children }) => <ol className={classMap.ol}>{children}</ol>,
         a: ({ href, children }) => (
-          <a href={href} className={classMap.a}>
+          <a href={href} target="_blank" className={classMap.a}>
             {children}
           </a>
         ),
