@@ -2,7 +2,6 @@ import hljs from 'highlight.js';
 import 'highlight.js/styles/tokyo-night-dark.min.css';
 import React from 'react';
 import Markdown from 'react-markdown';
-import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
 
 interface PostContentProps {
@@ -27,7 +26,6 @@ const PostContent: React.FC<PostContentProps> = ({ content }) => {
   return (
     <Markdown
       remarkPlugins={[remarkGfm]}
-      rehypePlugins={[rehypeRaw]}
       components={{
         img: ({ src, alt }) => <img src={src} alt={alt} className={classMap.img} />,
         h1: ({ children }) => <h1 className={classMap.h1}>{children}</h1>,
@@ -46,12 +44,10 @@ const PostContent: React.FC<PostContentProps> = ({ content }) => {
         code: ({ className, children, ...props }) => {
           const match = /language-(\w+)/.exec(className || '');
           if (match) {
-            // Bloc de code (dans <pre>)
             const language = match[1];
             const highlighted = hljs.highlight(String(children), { language }).value;
             return <code className={`language-${language}`} dangerouslySetInnerHTML={{ __html: highlighted }} {...props} />;
           }
-          // Code en ligne
           return (
             <code className={classMap.code} {...props}>
               {children}
