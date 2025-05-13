@@ -13,7 +13,7 @@ const classMap: Record<string, string> = {
   h1: 'text-4xl font-bold my-6',
   h2: 'text-3xl font-semibold my-5 text-white/90',
   h3: 'text-2xl font-semibold my-4 text-white/80',
-  p: 'mb-4 text-muted-foreground',
+  p: 'my-2 text-muted-foreground',
   ul: 'list-disc list-inside mb-4 pl-4 text-muted-foreground',
   ol: 'list-decimal list-inside mb-4 pl-4 text-muted-foreground',
   a: 'text-primary hover:underline',
