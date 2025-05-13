@@ -32,10 +32,12 @@ export default function BlogPage() {
         <div className="flex h-100 flex-col">
           <h1 className="mb-6 text-center text-xl font-bold uppercase sm:text-2xl md:text-3xl">{languageProvider.get('blog.title')}</h1>
           {posts.length === 0 && <p className="text-center">{languageProvider.get('blog.no_posts')}</p>}
-          <PostsContainer posts={posts} />
+          <div className="my-2">
+            <PostsContainer posts={posts} />
+          </div>
+          <Paginator pagination={pagination} />
+          <Footer />
         </div>
-        <Paginator pagination={pagination} />
-        <Footer />
       </div>
     </Layout>
   );
