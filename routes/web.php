@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\BlogController;
+use App\Http\Middleware\IsAuthorOrAdmin;
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
 
@@ -33,6 +34,7 @@ Route::middleware(['auth', 'verified'])->group(
     }
 );
 
+Route::get('/blog/preview/{post}/', [BlogController::class, 'preview'])->name('blog.preview')->middleware(IsAuthorOrAdmin::class);
 
 require __DIR__ . '/settings.php';
 require __DIR__ . '/auth.php';

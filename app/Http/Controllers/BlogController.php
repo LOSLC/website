@@ -102,6 +102,51 @@ class BlogController extends Controller
 
     }
 
+    public function preview(int $post): Response
+    {
+        $post = Post::select(['id', 'title', 'slug', 'description', 'content', 'image', 'views', 'category_id', 'author_id', 'created_at'])
+            ->with(['tags', 'category', 'author'])
+            ->findOrFail($post);
+
+        $post->isLiked = $post->getIsLikedAttribute();
+        $post->likesCount = $post->getLikesCountAttribute();
+        $post->commentsCount = $post->getCommentsCountAttribute();
+        $post->createdAt = $post->getCreatedAtAttribute($post->created_at);
+
+        $comments = $post->comments()
+            ->whereNull('parent_id')
+            ->with([
+                'author:id,name,avatar_url',
+                'replies' => function ($query) {
+                    $query->with('author:id,name,avatar_url');
+                }
+            ])
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $comments->transform(function ($comment) {
+            $comment->createdAt = $comment->getDateAttribute($comment->created_at);
+            $comment->updatedAt = $comment->getDateAttribute($comment->updated_at);
+
+            if ($comment->replies) {
+                $comment->replies->each(function ($reply) {
+                    $reply->createdAt = $reply->getDateAttribute($reply->created_at);
+                    $reply->updatedAt = $reply->getDateAttribute($reply->updated_at);
+                });
+            }
+
+            return $comment;
+        });
+
+        return Inertia::render('post', [
+            'post' => $post,
+            'tags' => $post->tags,
+            'category' => $post->category,
+            'comments' => $comments,
+        ]);
+
+    }
+
     public function comment(Request $request, Post $post): RedirectResponse
     {
         $request->validate(['comment' => ['required', 'string', 'max:1500']]);
