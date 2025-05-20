@@ -1,3 +1,4 @@
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/tokyo-night-dark.min.css';
 import React from 'react';
@@ -9,16 +10,16 @@ interface PostContentProps {
 }
 
 const classMap: Record<string, string> = {
-  img: 'rounded my-2',
+  img: 'rounded my-2 w-full h-auto',
   h1: 'text-4xl font-bold my-6',
-  h2: 'text-3xl font-semibold my-5 text-white/90',
-  h3: 'text-2xl font-semibold my-4 text-white/80',
+  h2: 'text-3xl font-semibold my-5 text-base-content/90',
+  h3: 'text-2xl font-semibold my-4 text-base-content/80',
   p: 'my-2 text-muted-foreground',
   ul: 'list-disc list-inside mb-4 pl-4 text-muted-foreground',
   ol: 'list-decimal list-inside mb-4 pl-4 text-muted-foreground',
   a: 'text-primary hover:underline',
   blockquote: 'border-l-4 border-accent pl-4 italic my-4 text-muted-foreground bg-accent/30 p-2',
-  pre: 'bg-muted p-4 mb-4 overflow-auto text-sm rounded-md',
+  pre: 'bg-muted p-4 mb-4 overflow-auto text-sm rounded-md w-full',
   code: 'bg-accent px-2 py-1 font-mono text-sm rounded text-accent-foreground',
 };
 
@@ -54,6 +55,12 @@ const PostContent: React.FC<PostContentProps> = ({ content }) => {
             </code>
           );
         },
+        table: ({ children }) => <Table className="my-4">{children}</Table>,
+        thead: ({ children }) => <TableHeader className="w-[100px]">{children}</TableHeader>,
+        tbody: ({ children }) => <TableBody className="text-muted-foreground">{children}</TableBody>,
+        tr: ({ children }) => <TableRow>{children}</TableRow>,
+        th: ({ children }) => <TableHead>{children}</TableHead>,
+        td: ({ children }) => <TableCell>{children}</TableCell>,
       }}
     >
       {content}
